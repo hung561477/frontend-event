@@ -1,0 +1,76 @@
+<event-top-create-event></event-top-create-event>
+
+<div class="row p-top-90">
+  <div class="col-12">
+
+    <div class="card wizard-content">
+      <div class="card-body">
+
+        <form action="" class="validation-wizard wizard wizard-circle" [formGroup]="createEvent">
+          <div class="steps clearfix">
+            <ul role="tablist">
+              <li role="tab" [ngClass]="(isActive === 1)? 'first current':'first done'">
+                <a id="steps-1">
+                  <span class="current-info audible">current step: </span>
+                  <span [ngClass]="(submitted === false)? 'step':'step error'">1</span>
+                  Introduction
+                </a>
+              </li>
+              <li role="tab" [ngClass]="{'current': isActive === 2,'disabled': isActive < 2, 'done': isActive > 2}">
+                <a id="steps-2">
+                  <span [ngClass]="(!validateStep === false)? 'step':'step error'">2</span>
+                  Audience
+                </a>
+              </li>
+              <li role="tab" [ngClass]="{'current': isActive === 3,'disabled': isActive < 3, 'done': isActive > 3}">
+                <a id="steps-3">
+                  <span class="step">3</span>
+                  Branding
+                </a>
+              </li>
+              <li role="tab" [ngClass]="{'current': isActive === 4,'disabled': isActive < 4, 'done': isActive > 4}">
+                <a id="steps-4">
+                  <span class="step">4</span>
+                  Pricing
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="content clearfix">
+            <!-- Step 1 -->
+            <h6 id="steps-uid-0-h-0" tabindex="-1" class="title current">Introduction</h6>
+            <event-step-1 [ngClass]="(isActive === 1)? '':'d-none'" [step1]="createEvent"></event-step-1>
+            <!-- Step 2 -->
+            <h6 id="steps-uid-0-h-1" tabindex="-1" class="title">Audience</h6>
+            <event-step-2 [ngClass]="(isActive === 2)? '':'d-none'" [step2]="createEvent"></event-step-2>
+            <!-- Step 3 -->
+            <h6 id="steps-uid-0-h-2" tabindex="-1" class="title">Branding</h6>
+            <event-step-3 [ngClass]="(isActive === 3)? '':'d-none'" [step3]="createEvent"></event-step-3>
+            <!-- Step 4 -->
+            <h6 id="steps-uid-0-h-3" tabindex="-1" class="title">Pricing</h6>
+            <event-step-4 *ngIf="isActive === 4" [ngClass]="(isActive === 4)? '':'d-none'" [step4]="createEvent"></event-step-4>
+          </div>
+          <div [ngClass]="(isActive === 4)? 'row':'d-none'">>
+            <div class="col-sm-3">
+              <a class="btn btn-outline-info waves-effect waves-light m-b-20" (click)="goPreview()"><span class="btn-label"><i
+                    class="fas fa-ticket-alt"></i></span>Preview</a>
+            </div>
+          </div>
+          <div class="actions clearfix">
+            <ul role="menu" aria-label="Pagination">
+              <li [ngClass]="(isActive === 4)? '':'d-none'" *ngIf="!statusUpdate"><a (click)="onSubmit()">Save</a></li>
+              <li [ngClass]="(isActive === 4)? '':'d-none'" *ngIf="statusUpdate"><a (click)="onSubmitEdit()">Update</a></li>
+              <li class="disabled" aria-disabled="true"><a (click)="preStep()" role="menuitem">Previous</a></li>
+              <li [ngClass]="(isActive === 4)? 'd-none':''" class="next-step"><a (click)="nextStep()" role="menuitem">Next</a></li>
+              <li [ngClass]="(isActive === 4)? '':'d-none'" *ngIf="!statusUpdate"><a (click)="onPublishCreate()" role="menuitem">Publish</a></li>
+              <li [ngClass]="(isActive === 4)? '':'d-none'" *ngIf="statusUpdate"><a (click)="onPublishEdit()" role="menuitem">Publish</a></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>

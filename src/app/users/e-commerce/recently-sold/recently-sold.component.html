@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Sold <a (click)="goRecentEvent()" class="btn btn-outline-info waves-effect waves-light float-right"><span
+          class="btn-label"><i class="far fa-file-image"></i></span>View All</a></h4>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Inventory</th>
+
+            <th>Location</th>
+            <th>Amount</th>
+
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of recentlySold">
+            <td>{{item.name}}</td>
+            <td>Inventory1</td>
+            <td *ngIf="item.location !== null">{{item.location.name}}</td>
+            <td>$23132</td>
+            <td>
+              <a (click)="delEvent(item.id)" class="btn btn-xs btn-outline-danger waves-effect waves-light"  title="Delete the Event">
+                <i class="far fa-trash-alt"></i></a> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

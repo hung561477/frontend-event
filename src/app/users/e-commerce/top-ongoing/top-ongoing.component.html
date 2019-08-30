@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Inventory <a (click)="goRecentEvent()" class="btn btn-outline-info waves-effect waves-light float-right"><span
+            class="btn-label"><i class="far fa-file-image"></i></span>View All</a></h4>
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Inventory</th>
+              <th>Date</th>
+              <th>Deadline</th>
+              <th>$ Amount</th>
+              <th class="text-center"><span class="label label-warning">Wishlist</span> <span class="label label-info">Views</span><span class="label label-primary">Likes</span></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of topOngoing" class="click-detail" (click)="goEventDetail(item.event.id)">
+              <td>{{item.name}}</td>
+              <td>Inventory1 <br> <small>Sold 5 - Available 10</small></td>
+              <td>{{item.date_from | date:'dd/MM/yyyy'}}</td>
+              <td>{{item.sponsorship_deadline | date:'dd/MM/yyyy'}}</td>
+              <td>$xxx</td>
+              <td class="text-center"><span class="label label-warning">{{item.wishlist}}</span> <span class="label label-info">{{item.event.view}}</span><span class="label label-primary">{{item.event.like}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

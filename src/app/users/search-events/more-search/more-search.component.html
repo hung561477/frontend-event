@@ -1,0 +1,42 @@
+<div id="searchOverlay" [ngClass]="menuOpen? 'overlay open-search': 'overlay more-search'">
+    <span class="closebtn" (click)="closeSearch()" title="Close Overlay">×</span>
+    <div class="overlay-content">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-3 col-md-6">
+                    <tag-input class="tag-input" [theme]="'bootstrap'" formControlName="keyword" [secondaryPlaceholder]="'With a few keywords, tell us the type of events you are looking for'"
+                        [(ngModel)]='itemsKey' name="keyword" [addOnBlur]="true">
+                    </tag-input>
+                    <i class="fas fa-search"></i>
+                    <!-- <input class="form-control" type="text" placeholder="With a few KEYWORDS, tell us the type of event you are looking for"
+                        id="example-text-input" formControlName="keyword"> -->
+                </div>
+            </div>
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-3 col-md-6">
+                    <tag-input class="tag-input" [theme]="'bootstrap'" formControlName="venue" [secondaryPlaceholder]="'Search by country, city or venue'"
+                        [(ngModel)]='itemsVenue' name="keyword" [addOnBlur]="true">
+                    </tag-input>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <!-- <input class="form-control" type="text" placeholder="You can search by country, city, and even venue"
+                        id="example-text-input" formControlName="venue"> -->
+                </div>
+            </div>
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-3 col-md-6">
+                    <i class="fa fa-calendar-alt"></i>
+                    <input type="text" name="datetimes" placeholder="Search by range or specific dates" class="form-control datetime required abc"
+                        formControlName="dateRange" />
+                </div>
+            </div>
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-3 col-md-6">
+                    <button id="search-btn" type="submit" class="btn btn-block btn btn-rounded btn-success hvr-shutter-out-vertical"
+                        (click)="closeSearch()">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

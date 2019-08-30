@@ -1,0 +1,66 @@
+<div class="searched-box-bg">
+    <div class="row m-0 searched-box-bg-inner">
+        <div class="col-sm-5 p-0">
+            <carousel *ngIf="images">
+                <slide *ngFor="let item of images">
+                    <img [src]="item" alt="first slide" class="img-fluid">
+                </slide>
+            </carousel>
+        </div>
+        <div class="col-sm-4 p-0 searched-box-text">
+            <div>
+                <h2>{{completed.name}} </h2>
+                <h3 *ngIf="completed.location !== null">{{completed.location.name}} </h3>
+                <p>{{ completed.date_to | date : 'd MMMM y'}} </p>
+                <h3>Expected Audience {{completed.size}} </h3>
+                <h3 class="days-to-go m-t-20">
+                    {{time}} Days to go
+                </h3>
+                <br>
+                <h3 class=" m-t-20">
+                    Partnership Opportunities {{completed.name}}
+                </h3>
+                <h3 class="Opportunities"> <b class="Completed">Available {{completed.countInventoryAvailable}} </b> <b class="sold"> Sold Out {{completed.countInventorySold}}</b></h3>
+            </div>
+        </div>
+        <div class="col-sm-3 p-0 searched-box-text">
+            <h3 class="text-sm-right">Average ticket price: {{completed.ticket_price}}</h3>
+            <h3 class="text-sm-right">Budget Starting {{completed.household_income.from}}K $ </h3>
+            <p class="text-sm-right"><span class="tags" *ngFor="let itemTag of this.tag">{{itemTag}}</span></p>
+        </div>
+        <div class="col-lg-12">
+            <div class="row m-0 ">
+                <div class="col-sm-9 p-0 searched-box-text2">
+                    <p>
+                        {{completed.description}}
+                    </p>
+                </div>
+                <div class="col-sm-3 p-0 event-search-btn-bg">
+                    <a (click)="goEventDetail(completed.id)" class="btn btn-block btn-primarys waves-effect waves-light"><span
+                            class="btn-label"><i class="fas fa-list-alt"></i></span>Discover</a>
+                    <div class="like-share-btn-bg">
+                        <a [ngClass]="completed.like === 1? 'like-btn btn btn-outline-info active' : 'like-btn btn btn-outline-info'"
+                            (click)="likeEvent(completed.id)"><i class="fas icon-color fa-heart"></i></a>
+                        <div class="share btn btn-outline-info">
+                            <span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i class="fas icon-color fa-share-alt"></i>
+                                </span><span class="tooltip-content4 clearfix">
+                                    <!-- <button class="btn btn-facebook waves-effect btn-circle waves-light" type="button">
+                                        <i class="fab fa-facebook"></i> </button>
+                                    <button class="btn btn-facebook waves-effect btn-circle waves-light" type="button">
+                                        <i class="fab fa-twitter"></i> </button>
+                                    <button class="btn btn-googleplus waves-effect btn-circle waves-light" type="button">
+                                        <i class="fab fa-google-plus"></i> </button>
+                                    <button class="btn btn-linkedin waves-effect btn-circle waves-light" type="button">
+                                        <i class="fab fa-linkedin"></i> </button> -->
+                                    <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','google','linkedin']"
+                                        [show]="4" [size]="4" [url]="'http://qa.event.com/users/event-detail/1'"
+                                        [autoSetMeta]="false"></share-buttons>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

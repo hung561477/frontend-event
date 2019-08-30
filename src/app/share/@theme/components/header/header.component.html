@@ -1,0 +1,43 @@
+<div [ngClass]="isLogo? 'header-container': 'header-container expanded'" [class.left]="position === 'normal'"
+  [class.right]="position === 'inverse'">
+  <img src="../../../../../assets/logo-light-icon.png" alt="homepage" class="d-xl-none">
+  <div *ngIf="!isLogo" [ngClass]="isLogo? 'logo-containter compacted mini-sidebar': 'logo-containter'">
+    <div class="logo" (click)="goToHome()">
+      <img src="../../../assets/images/logo.png" alt="Logo">
+    </div>
+  </div>
+  <event-theme-switcher (valueOutput)="hiddenLogo()"></event-theme-switcher>
+</div>
+
+<div class="header-container">
+  <event-layout-direction-switcher></event-layout-direction-switcher>
+  <ul class="navbar-nav my-lg-0">
+    <li [ngClass]="isToggle? 'nav-item dropdown show': 'nav-item dropdown'">
+      <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" (click)="toogle()" aria-expanded="false">
+        <i class="far fa-bell"></i>
+        <div class="notify" *ngIf="unRead > 0">
+          <span class="heartbit"></span>
+          <span class="point"></span>
+        </div>
+      </a>
+      <div [ngClass]="isToggle? 'dropdown-menus notification dropdown-menu-right scale-up show': 'dropdown-menus notification dropdown-menu-right scale-up'"
+        aria-labelledby="2">
+        <ul>
+          <li>
+            <div class="drop-title">You have {{unRead}} new notifications</div>
+          </li>
+          <li *ngFor="let item of listNotification.data" [ngClass]="item.status? 'none-read': ''">
+            <a (click)="changeRead(item.id)">
+              {{item.subject}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" (click)="logout()"> <i class="fa fa-power-off"></i>
+      </a>
+    </li>
+
+  </ul>
+</div>

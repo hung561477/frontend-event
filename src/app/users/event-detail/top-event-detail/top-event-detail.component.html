@@ -1,0 +1,26 @@
+<div class=" main-sub-menu">
+    <a *ngIf="role === 'SELLER'" (click)="backMonitoring()" class="back-button"><i class="fas fa-chevron-left"></i></a>
+    <h3 class="sub-header-text">Event Details</h3>
+    <div *ngIf="role === 'SELLER' && paramId !== 'preview'" class="top-bar-btn-bg d-none d-sm-block">
+        <a (click)="goEditEvent()" class="wishlist-bg green-bg hvr-rectangle-out">
+            <span>Event</span><i class="fas fa-edit"></i>
+            <h4>Edit </h4>
+        </a>
+        <a (click)="open(content)" class="sold-bg hvr-rectangle-out">
+            <span>Event</span><i class="fas fa-trash-alt"></i>
+            <h4>Delete</h4>
+        </a>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Are you sure you want to Remove</h4>
+                <button type="button" class="close" (click)="modal.dismiss('Cross click')">×</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-info waves-effect" (click)="delEvent(content)">Yes I'm Sure</button>
+                <button type="button" class="btn btn-danger waves-effect" (click)="modal.close('Close click')"> No
+                    don't Delete
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

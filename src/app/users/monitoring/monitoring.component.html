@@ -1,0 +1,35 @@
+<toaster-container [toasterconfig]="config"></toaster-container>
+<event-top-monitoring></event-top-monitoring>
+
+<div class="row p-top-90">
+  <div *ngIf="itemShow === 3" class="w-100">
+    <div *ngFor="let item of completedWishlist" class="col-xl-12 p-0">
+      <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+    </div>
+  </div>
+  <div *ngIf="itemShow === 4" class="w-100">
+    <div *ngFor="let item of completedReserved" class="col-xl-12 p-0">
+      <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+    </div>
+  </div>
+  <div *ngIf="itemShow === 5" class="w-100">
+    <div *ngFor="let item of completedOngoing" class="col-xl-12 p-0">
+      <event-item-recent-event [valueInput]="item"></event-item-recent-event>
+    </div>
+  </div>
+  <div *ngIf="itemShow === 2" class="w-100">
+    <div *ngFor="let item of completedSold" class="col-xl-12 p-0">
+      <event-item-recent-event [valueInput]="item"></event-item-recent-event>
+    </div>
+  </div>
+  <div *ngIf="itemShow === 1" class="w-100">
+    <div *ngFor="let item of completedAll" class="col-xl-12 p-0">
+      <div *ngIf="role === 'BUYER'">
+        <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+      </div>
+      <div *ngIf="role === 'SELLER'">
+        <event-item-recent-event [valueInput]="item"></event-item-recent-event>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+.dashboard-table {
+    h4 {
+        -ms-transform: rotate(270deg);
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+        color: #fff;
+        font-weight: 600;
+        font-size: 12px;
+        width: 100%;
+        float: left;
+        position: absolute;
+        padding: 10px 0 10px 0px;
+        top: 13px;
+        width: 73px;
+        left: -4px;
+        text-align: center;
+        line-height: 22px;
+    }
+}
+
+.b-r {
+    border-right: 1px solid rgba(120, 130, 140, 0.13);
+}
+
+.wishlist-bg {
+    background: #F25C00;
+}
+
+.reserved-bg {
+    background: #258039;
+}
+
+.completed-bg {
+    background: #1e88e5;
+}
+
+.total-bg {
+    background: #C60000;
+}
+
+.wishlist {
+    color: #F25C00;
+}
+
+.reserved {
+    color: #258039;
+}
+
+.completed {
+    color: #4897D8;
+}
+
+.total {
+    color: #C60000;
+}
+
+.completed {
+    color: #4597ef;
+}
+
+.font-light {
+    font-weight: 300;
+}
+
+.dashboard-progress-bar {
+    margin-top: -18px;
+    b {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 4px;
+        color: #747d8a;
+    }
+    .progress {
+        height: auto;
+        margin-bottom: 5px;
+    }
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.m-t-30 {
+    margin-top: 30px;
+}
+
+.m-b-15 {
+    margin-bottom: 15px;
+}
+
+b {
+    font-weight: bolder;
+    font-size: 16px;
+    color: #747d8a;
+}
+
+.bg-danger {
+    background-color: #fc4b6c !important;
+}
+
+.bg-infos {
+    background-color: #273655 !important;
+}
+
+.progress-animated {
+    -webkit-animation-duration: 5s;
+    -webkit-animation-name: myanimation;
+    -webkit-transition: 5s all;
+    animation-duration: 5s;
+    animation-name: myanimation;
+    transition: 5s all;
+}

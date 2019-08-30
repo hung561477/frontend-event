@@ -1,0 +1,79 @@
+<div id="filterOverlay" [ngClass]="menuFilter? 'overlay open-search' : 'overlay more-search'">
+    <span class="closebtn" (click)="closeSearch()" title="Close Overlay">×</span>
+    <div class="overlay-content">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-1 col-md-5">
+                    <div class="btn-group radio" data-toggle="buttons">
+                        <label [ngClass]="gender.all? 'btns btn-danger active': 'btns btn-danger'">
+                            <div class="custom-controls custom-radio">
+                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input"
+                                 checked (change)="addAll($event)">
+                                <label class="custom-control-labels" for="customRadio4">All</label>
+                            </div>
+                        </label>
+                        <label [ngClass]="gender.male? 'btns btn-danger active': 'btns btn-danger'">
+                            <div class="custom-controls custom-radio">
+                                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input"
+                                (change)="addMale($event)"> 
+                                <label class="custom-control-labels" for="customRadio5">Male</label>
+                            </div>
+                        </label>
+                        <label [ngClass]="gender.female? 'btns btn-danger active': 'btns btn-danger'">
+                            <div class="custom-controls custom-radio">
+                                <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input"
+                                (change)="addFemale($event)">
+                                <label class="custom-control-labels" for="customRadio6">Female</label>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="sreach-textbox col-md-5">
+                    <div class="form-group">
+                        <div class="range-separation">
+                            <h4 class="range-slider-text p-b-16">Set the Budget Range ($1K to $100K + USD)
+                            </h4>
+                            <div class="clearfix"></div>
+                            <input type="text" id="range_05" name="range_05" value="" />
+                            <!-- <ion-range-slider #advancedSliderElement type="double"
+                                (onUpdate)="updateBudget(advancedSliderElement, $event)" (onChange)="updateBudget(advancedSliderElement, $event)"
+                                (onFinish)="finishBudget(advancedSliderElement, $event)" max="250" from="{{from}}" from_min="1"
+                                from_max="250" from_shadow="true" to="{{to}}" min="1" to_min="1" to_max="250" to_shadow="true"
+                                step="5" prefix="$" postfix="K" decorate_both="false"></ion-range-slider> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-1 col-md-5">
+                    <div class="form-group">
+                        <div class="range-separation">
+                            <h4 class="range-slider-text p-b-16">Set the Age Range *
+                            </h4>
+                            <div class="clearfix"></div>
+                            <input type="text" id="range_01" name="range_01" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="sreach-textbox col-md-5">
+                    <div class="form-group">
+                        <div class="range-separation">
+                            <h4 class="range-slider-text p-b-16">Set the Event Size (Atendees)
+                            </h4>
+                            <div class="clearfix"></div>
+                            <input type="text" id="range_02" name="range_02" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-group row m-0">
+                <div class="sreach-textbox offset-md-4 col-md-4">
+                    <button id="search-btn" type="submit" class="btn btn-block btn btn-rounded btns-success hvr-shutter-out-vertical"
+                        (click)="closeSearch()">
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

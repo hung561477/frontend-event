@@ -1,0 +1,165 @@
+<event-top-dashboard></event-top-dashboard>
+<div class="row p-top-70" *ngIf="role !== 'SELLER'">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8 ">
+            <h4 class="card-title">My Event Summary </h4>
+          </div>
+
+
+          <div class="col-4 p-b-10">
+            <select #selected class="form-control" (change)="onUSD(selected.value)">
+              <option value="usd">USD</option>
+              <option value="eur">EUR</option>
+              <option value="sgd">SGD</option>
+            </select>
+          </div>
+        </div>
+        <event-summary></event-summary>
+
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="row" *ngIf="role !== 'SELLER'">
+  <div class="col-lg-12">
+    <nb-card>
+      <ngb-tabset [activeId]="activeTab" (tabChange)="activeTab = $event.nextId">
+        <ngb-tab title="Your Upcoming Events" id="tab1" [disabled]="true">
+          <ng-template ngbTabContent>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="All" id="tab2">
+          <ng-template ngbTabContent>
+            <div class="row m-0">
+              <div class="col-lg-6 plr-10 m-t-10" *ngFor="let item of completedAll">
+                <event-soon [valueInput]="item"></event-soon>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Reserved" id="tab3">
+          <ng-template ngbTabContent>
+            <div class="row m-0">
+              <div class="col-lg-6 plr-10 m-t-10" *ngFor="let item of completedReserved">
+                <event-soon [valueInput]="item"></event-soon>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Wishlist" id="tab4">
+          <ng-template ngbTabContent>
+            <div class="row m-0">
+              <div class="col-lg-6 plr-10 m-t-10" *ngFor="let item of completedWishlist">
+                <event-soon [valueInput]="item"></event-soon>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Suggestions" id="tab5">
+          <ng-template ngbTabContent>
+            <div class="row m-0">
+              <div class="col-lg-6 plr-10 m-t-10">
+                <p>This feature is coming soon.</p>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </nb-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="role !== 'SELLER'">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title">Overview of your sponsorship opportunities</h4>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" name="datetimes" class="form-control datetime required abc" [(ngModel)]='valueDateRange' />
+              <!-- <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <event-country-orders></event-country-orders> -->
+        <event-bubble-map></event-bubble-map>
+        <div class="text-center">
+          <ul class="list-inline">
+
+            <li>
+              <h6 class="reserved"><i class="fa fa-circle font-10 m-r-10"></i>Reserved</h6>
+            </li>
+            <li>
+              <h6 class="wishlist"><i class="fa fa-circle font-10 m-r-10"></i>Wishlist</h6>
+            </li>
+            <li>
+              <h6 class="completed"><i class="fa fa-circle font-10 m-r-10"></i>Completed</h6>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="role !== 'SELLER'">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title">Audience reach</h4>
+          </div>
+          <div class="col-md-6">
+            <div class="text-center">
+              <ul class="list-inline">
+                <li>
+                  <h6 class="reserved"><i class="fa fa-circle font-10 m-r-10"></i>Reserved</h6>
+                </li>
+                <li>
+                  <h6 class="wishlist"><i class="fa fa-circle font-10 m-r-10"></i>Wishlist</h6>
+                </li>
+                <li>
+                  <h6 class="completed"><i class="fa fa-circle font-10 m-r-10"></i>Completed</h6>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- <event-chartjs-bar></event-chartjs-bar> -->
+        <div *ngFor="let chart of charts">
+          <event-chartist class="col-md-6" [data]="chart.data" [type]="chart.type" [options]="chart.options"
+            [responsiveOptions]="chart.responsiveOptions" [events]="chart.events">
+          </event-chartist>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row table-event m-top-70" *ngIf="role === 'SELLER'">
+  <!-- Column -->
+  <div class="col-12">
+    <event-top-ongoing></event-top-ongoing>
+  </div>
+  <!-- Column -->
+  <div class="col-12">
+    <event-recently-sold></event-recently-sold>
+  </div>
+
+  <div class="col-12">
+    <event-not-published></event-not-published>
+  </div>
+</div>

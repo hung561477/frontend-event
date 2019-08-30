@@ -1,0 +1,46 @@
+<ng-template #editSomething let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Event</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm"><label>Change event name</label>
+            <div class="input-group">
+                <input class="form-control" value="{{eventName}}" formControlName="title" type="text">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-success waves-effect waves-light" (click)="editEvent()"><i class="fa fa-check"></i>
+                        Save</button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white waves-effect" (click)="modalRef.hide()">Close</button>
+        <button type="button" class="btn btn-danger delete-event waves-effect waves-light" (click)="delEvent()">Delete</button>
+    </div>
+</ng-template>
+
+<ng-template #addSomething let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Event</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group"><label class="control-label">Event Name</label><input class="form-control"
+                            placeholder="Insert Event Name" type="text" name="title" formControlName="title"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white waves-effect" (click)="modalRef.hide()">Close</button>
+        <button type="button" class="btn btn-success delete-event waves-effect waves-light" (click)="addEvent()">Create event</button>
+    </div>
+</ng-template>

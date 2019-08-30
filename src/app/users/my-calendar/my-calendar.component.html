@@ -1,0 +1,14 @@
+<event-top-my-calendar></event-top-my-calendar>
+<div class="clearfix"></div>
+<div class="row p-top-70">
+    <div class="col-12">
+        <div class="card card-body">
+            <div #externals id="calendar-events" [ngClass]="role === 'SELLER'? 'row': 'row d-none'">
+                <div class="col-sm-4 calendar-events" ngDraggable
+                    [trackPosition]="false" *ngFor="let event of externalEvents" [attr.data-event]="getEvent(event)"><i
+                        class="fa fa-circle {{event.class}}"></i>{{event.title}}</div>
+            </div>
+            <event-calendar #ucCalendar [(events)]="events" [externalsRef]="externals" (clickButton)="clickButton($event.detail)"></event-calendar>
+        </div>
+    </div>
+</div>

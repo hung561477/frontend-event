@@ -1,0 +1,72 @@
+<event-top-search></event-top-search>
+<div class="clearfix"></div>
+<div class="row p-top-70">
+    <div class="col-lg-9 col-md-10 p-l-10 p-r-10">
+        <div class="add1-bg">
+            <img src="../../../assets/images/ads/ads-1.png" width="100%">
+        </div>
+        <div *ngFor="let item of completed">
+            <event-item-search-event [valueInput]="item"></event-item-search-event>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-2 p-l-10 p-r-10 hidden-md-down">
+        <div class="search-map-bg" (click)="lgModal.show()">
+            <img src="../../../assets/images/banner/668x255px.png" width="100%">
+        </div>
+        <div bsModal #lgModal="bs-modal" class="modal fade" [config]="{backdrop: false}" tabindex="-1" role="dialog"
+            aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="overlay">
+                <span class="closebtn" (click)="lgModal.hide()" title="Close Overlay">×</span>
+                <div class="overlay-content">
+                    <div class="search-group row m-0">
+                        <div class="col-md-4 card map-list d-none d-sm-none d-md-none d-lg-block">
+                            <a href="" class="searched-box-bg" *ngFor="let item of completed">
+                                <div class="row m-0 searched-box-bg-inner">
+                                    <div class="col-5 col-sm-4 col-lg-3 p-0">
+                                        <div class="ribbon2"><span class="ribbon-text1">In Wishlist</span></div>
+                                        <carousel *ngIf="item.image">
+                                            <slide *ngFor="let item of item.image">
+                                                <img [src]="item.url" alt="first slide" class="img-fluid">
+                                            </slide>
+                                        </carousel>
+                                    </div>
+                                    <div class="col-7 col-sm-8 col-lg-9 p-0">
+                                        <div class="row m-0 ">
+                                            <div class="col-12 p-0 searched-box-text">
+                                                <div>
+                                                    <h2>{{item.name}} </h2>
+                                                    <h3 *ngIf="item.location !== null">{{item.location.name}} </h3>
+                                                    <h3>{{item.sponsor_deadline | date : 'd MMMM y'}} </h3>
+                                                    <h3 class="">Budget Starting ${{item.household_income.from}}.000 </h3>
+                                                </div>
+                                                <div class=" event-search-btn-bg">
+                                                    <button class="reserved-bt reserved-bg waves-effect waves-dark hvr-shutter-out-vertical">Reserve</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="2"
+                                    [disableDefaultUI]="true"
+                                    [zoomControl]="true" [mapDraggable]="true">
+                                        <agm-marker *ngFor="let data of dataLocation" [latitude]="data.lng" [longitude]="data.lat"></agm-marker>
+                                    </agm-map>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="add1-bg">
+            <img src="../../../assets/images/ads/ads-2.png" width="100%">
+            <img src="../../../assets/images/ads/ads-3.png" width="100%">
+        </div>
+    </div>
+</div>

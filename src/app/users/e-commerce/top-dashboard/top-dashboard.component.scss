@@ -1,0 +1,75 @@
+.main-sub-menu {
+    background: #fff;
+    top: 70px;
+    width: calc(100% + 60px);
+    height: 60px;
+    margin: 0 30px 20px -30px;
+    h3 {
+        color: #273655;
+        font-size: 17px;
+        float: left;
+        width: 50%;
+        padding: 20px;
+    }
+    .search-bg {
+        float: right;
+        width: 40%;
+        span {
+            position: relative;
+            top: 18px;
+            left: 10px;
+            font-size: 24px;
+        }
+        input {
+            border: none;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 28px 30px 25px 40px;
+            position: relative;
+            top: -26px;
+            color: rgba(255, 255, 255, 0.6);
+            border-right: 1px solid #2a2a2a;
+            &::-webkit-input-placeholder {
+                font-size: 16px;
+                color: #747d8a;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .main-sub-menu {
+        margin: 0 30px 20px -30px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .main-sub-menu {
+        margin: 0 30px 20px -15px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .main-sub-menu {
+        margin: 0 30px 20px -45px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .main-sub-menu {
+        margin: 0 30px 20px -15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .main-sub-menu {
+        margin: -0 30px 20px -30px;
+    }
+}
+
+@media screen and (max-width: 398px) {
+    .main-sub-menu {
+        margin: -10px 30px 20px -30px;
+    }
+}

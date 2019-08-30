@@ -1,0 +1,78 @@
+<form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label class="sr-only" for="input-event-name">Event name</label>
+        <input formControlName="name" id="input-event-name" name="Event name" placeholder="Event name" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-location">Location</label>
+        <input formControlName="location" id="input-location" name="Location" placeholder="Location" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-venue">Venue</label>
+        <input formControlName="venue" id="input-venue" name="Venue" placeholder="Venue" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-venue">Status</label>
+        <input formControlName="status" id="input-status" name="Status" placeholder="Status" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-image">Image</label>
+        <input formControlName="image" id="input-status" name="Image" placeholder="Image" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-url">Url</label>
+        <input formControlName="url" id="input-url" name="Url" placeholder="Url" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-social-link">Social Link</label>
+        <input formControlName="social_link" id="input-social-link" name="Social Link" placeholder="Social Link" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-size">Size</label>
+        <input formControlName="size" id="input-size" name="Size" placeholder="Size" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-tag">Tag</label>
+        <input formControlName="tag" id="input-tag" name="Tag" placeholder="Tag" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-date-from">Date From</label>
+        <input formControlName="date_from" id="input-date-from" name="Date From" placeholder="Date From" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-date-to">Date To</label>
+        <input formControlName="date_to" id="input-date-to" name="Date To" placeholder="Date To" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-date">Date</label>
+        <input formControlName="date" id="input-date" name="Date" placeholder="Date" class="input-full-width input-md input-rectangle"
+            required="">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="input-sponsor-deadline">Sponsor Deadline</label>
+        <input formControlName="sponsor_deadline" id="input-sponsor-deadline" name="Sponsor Deadline" placeholder="Sponsor Deadline"
+            class="input-full-width input-md input-rectangle" required="">
+    </div>
+    <button class="btn-success btn-full-width btn-disabled" tabindex="-1"> Create Event</button>
+</form>
+
+<div class="form-group">
+    <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+    </div>
+</div>
+<pre>Model: {{ model | date:'MM/dd/yyyy' }}</pre>

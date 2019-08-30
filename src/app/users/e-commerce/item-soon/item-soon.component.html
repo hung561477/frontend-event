@@ -1,0 +1,32 @@
+<div class="event-box-bg">
+    <div class="row m-0 event-box-bg-inner">
+        <div class="col-4 p-0">
+            <img src="{{completed.image[0].url}}">
+            <span class="categorey reserved" *ngIf="completed.userStatus === 'RESERVED'">In Reserved</span>
+            <span class="categorey wishlist" *ngIf="completed.userStatus === 'WISHLIST'">In Wishlist</span>
+        </div>
+        <div class="col-5 p-0 Ebox-details1">
+            <div>
+                <h3>{{completed.name}} </h3>
+                <h5 *ngIf="completed.location !== null">{{completed.location.name}} </h5>
+                <p>{{ completed.sponsor_deadline | date : 'd MMMM y'}} </p>
+            </div>
+            <h4>Expected Audience <span>{{completed.size}}</span> </h4>
+            <p class="d-none d-sm-block">Budget Starting ${{completed.household_income.from}}K</p>
+        </div>
+        <div class="col-3 p-0 Ebox-details2">
+            <div>
+                <h3 class="wishlist">14 Days left</h3>
+                <p>{{completed.tag}}, maximum {{countTag}} tags</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="event-bot-btn-bg">
+    <a *ngIf="completed.userStatus === 'RESERVED' || completed.userStatus === undefined " class="btn btn-sm btn-outline-info waves-effect waves-light float-right"
+    (click)="goEventDetail(completed.id)"><span
+            class="btn-label"></span>Discover</a>
+    <a *ngIf="completed.userStatus === 'WISHLIST'" class="btn btn-sm btn-outline-warning waves-effect waves-light float-right"
+    (click)="goEventDetail(completed.id)"><span
+            class="btn-label"></span>Discover</a>
+</div>

@@ -1,0 +1,75 @@
+<div class="searched-box-bg" (click)="goEventDetail(completed.id)">
+    <div class="row m-0 searched-box-bg-inner">
+        <div class="col-sm-4 p-0">
+            <div class="ribbon2 sold-bg" *ngIf="completed.userStatus === 'SOLD'">
+                <span class="ribbon-text1">Sold</span>
+            </div>
+            <div class="ribbon2 sold-bg" *ngIf="pathUrl === 'past-event'">
+                <span class="ribbon-text1">Finished</span>
+            </div>
+            <div class="ribbon2 green-bg" *ngIf="completed.userStatus === 'ONGOING'">
+                <span class="ribbon-text1">Ongoing</span>
+            </div>
+            <div class="ribbon2 available-bg" *ngIf="completed.userStatus === undefined && pathUrl !== 'past-event' || completed.userStatus === 'ONGOGING'">
+                <span class="ribbon-text1">Available</span>
+            </div>
+            <carousel *ngIf="images">
+                <slide *ngFor="let item of images">
+                    <img [src]="item" alt="first slide" class="img-fluid">
+                </slide>
+            </carousel>
+        </div>
+        <div class="col-sm-8 p-0 searched-box-text">
+            <div class="row m-0 ">
+                <div class="col-sm-7 p-0 searched-box-text">
+                    <div>
+                        <h2>{{completed.name}} </h2>
+                        <h3 *ngIf="completed.location !== null">{{completed.location.name}} </h3>
+                        <p>{{ completed.date_from | date : 'd MMMM y'}} </p>
+                        <h3>Expected Audience {{completed.size}} </h3>
+                        <h3 class="days-to-go m-t-20" *ngIf="pathUrl !== 'past-event'">
+                            {{time}} Days to go
+                        </h3>
+                        <br>
+
+                        <h3 class=" m-t-20">
+                            Partnership Opportunities {{completed.name}}
+                        </h3>
+                        <h3 class="Opportunities"> <b class="Completed">Available {{completed.countInventoryAvailable}} </b> <b class="sold">
+                                Sold Out {{completed.countInventorySold}}</b></h3>
+                    </div>
+                </div>
+                <div class="col-sm-5 p-0 searched-box-text">
+
+                    <h3 class="text-sm-right">Average ticket price: {{completed.ticket_price}}</h3>
+                    <h3 class="text-sm-right">Budget Starting ${{completed.household_income.from}} </h3>
+                    <p class="text-sm-right"><span class="tags" *ngFor="let itemTag of this.tag">{{itemTag}}</span></p>
+                </div>
+                <div class="col-sm-12 p-0 searched-box-text2">
+                    <p>
+                        {{completed.description}}
+                    </p>
+                </div>
+                <div class="col-sm-12 p-0 searched-box-text2 m-t-15">
+                    <div class="d-flex flex-row float-right seller-views m-r-10">
+                        <div class="align-self-center m-l-30">
+                            <h3 class="m-b-0 text-info"><i class="fas fa-eye text-info"></i> {{completed.view}}
+                            </h3>
+                            <h5 class="text-muted m-b-0 text-center">Views</h5>
+                        </div>
+                        <div class="align-self-center m-l-30">
+                            <h3 class="m-b-0 text-warning"><i class="far fa-star text-warning"></i>
+                                {{completed.countInventoryWishlist}} </h3>
+                            <h5 class="text-muted m-b-0 text-center">Wishlists</h5>
+                        </div>
+                        <div class="align-self-center m-l-30">
+                            <h3 class="m-b-0 text-primary"><i class="far fa-heart text-primary"></i>
+                                {{completed.like}} </h3>
+                            <h5 class="text-muted m-b-0 text-center">Likes</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

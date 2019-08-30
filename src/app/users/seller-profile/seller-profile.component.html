@@ -1,0 +1,260 @@
+<event-top-seller-profile></event-top-seller-profile>
+
+<div class="row p-top-70" *ngIf="user.role === 'SELLER'">
+    <!-- Column -->
+    <div class="col-12">
+        <div class="card">
+            <div class="row m-0">
+                <div class="col-md-3 p-0">
+                    <img class="card-img-top img-responsive" src="{{company.image}}" alt="Card image cap">
+                </div>
+                <div class="col-md-9 p-0">
+                    <div class="card-body">
+                        <h4 class="card-title">{{company.name}}
+                            <button class="btn btn-outline-danger waves-effect waves-light float-right" (click)="openModal(edit_company, 'Edit Company')">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+                        </h4>
+                        <h6 class="card-subtitle m-0 link-styles" data-toggle="modal" data-target=".bs-modal-map"><i
+                                class="fas fa-map-marker-alt"></i> {{company.address}} </h6>
+                        <p class="card-text m-0">{{company.website}}</p>
+                        <p class="card-text">{{company.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Users
+                    <button class="btn btn-outline-danger waves-effect waves-light float-right" (click)="openModal(input_modal_user, 'Add Users')">
+                        <i class="far fa-address-card"></i>
+                        Add Users
+                    </button>
+                </h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Phone</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of listUser; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{user.first_name}}</td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td><a class="btn-action" (click)="openModal(input_modal_user, 'Edit User', user)"><i
+                                            class="far fa-edit"></i></a>
+                                    <a class="btn-action" (click)="openDelete(contentDelete)"><i class="far fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row p-top-70" *ngIf="user.role === 'BUYER'">
+    <div class="col-lg-4 col-xl-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <input type="file" (change)="imageChanged($event)" class="dropify4" accept=".png, .jpg, .jpeg"
+                    data-allowed-file-extensions="jpg png jpeg" data-max-file-size="300M" [attr.data-default-file]="avatar">
+                <p class="card-title-buyer">Change my profile image</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-7">
+        <div class="card">
+            <!-- Nav tabs -->
+
+            <div class="card-body">
+                <form class="form-horizontal form-material" [formGroup]="updateBuyerForm">
+                    <div class="form-group">
+                        <label class="col-md-12">First Name</label>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="" formControlName="first_name" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Last Name</label>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="" formControlName="last_name" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">New Password</label>
+                        <div class="col-md-12">
+                            <input type="password" placeholder="******" formControlName="new_password" class="form-control form-control-line"
+                                (keyup)="passwordBuyer($event)">
+                            <p class="txt-vali-company"> {{validate.buyer.new_password}}</p>
+                            <p class="danger-pass" *ngIf="g['new_password'].invalid && isPasswordBuyer === 1">Must
+                                contain at least one uppercase,
+                                one lowercase, one special character and one number</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Confirm New Password</label>
+                        <div class="col-md-12">
+                            <input type="password" placeholder="******" formControlName="confirm_password" class="form-control form-control-line"
+                                (keyup)="passwordBuyerConfirm($event)">
+                            <p class="txt-vali-company"> {{validate.buyer.confirm_password}}</p>
+                            <p class="danger-pass" *ngIf="g['confirm_password'].invalid && isPasswordBuyerConfirm === 1">Must
+                                contain at least one uppercase,
+                                one lowercase, one special character and one number</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Phone No</label>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="0912312323" formControlName="phone" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success" (click)="onSubmit()">Update Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #edit_company let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="edit-details">{{modalName}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">×</button>
+    </div>
+    <div class="modal-body">
+        <form class="form-material">
+            <div class="form-group">
+                <label for="name-company">Company Name</label>
+                <input type="text" id="name-company" name="name-company" class="form-control form-control-line"
+                    [(ngModel)]="company.name">
+            </div>
+            <div class="form-group">
+                <label for="address-company">Address</label>
+                <input type="text" id="address-company" name="address-company" class="form-control form-control-line"
+                    [(ngModel)]="company.address">
+            </div>
+            <div class="form-group">
+                <label for="website-company">Website URL </label>
+                <input type="email" id="website-company" name="website-company" class="form-control" [(ngModel)]="company.website">
+            </div>
+            <div class="form-group">
+                <label for="email-company">Email </label>
+                <input type="email" id="email-company" name="email-company" class="form-control" placeholder=""
+                    [(ngModel)]="company.email" [readonly]="disableEdit"></div>
+            <div class="form-group">
+                <label>Change Logo</label>
+                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                    <div class="form-control" data-trigger="fileinput">
+                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                        <span class="fileinput-filename">{{image.description}}</span>
+                    </div>
+                    <span class="input-group-addon btn btn-default btn-file">
+                        <span class="fileinput-new">Select file</span>
+                        <span class="fileinput-exists">Change</span>
+                        <input type="hidden">
+                        <input type="file" name="..." (change)="inputFile($event)">
+                    </span>
+                    <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description-company-input">Description</label>
+                <textarea class="form-control" id="description-company-input" name="description-company-input" rows="5"
+                    [(ngModel)]="company.description"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-cancel-list waves-effect text-left" (click)="modal.close('Save click')"><i
+                class="fas fa-window-close"></i>Close
+        </button>
+        <button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-target=".bs-modal-map2"
+            (click)="saveEdit('Company')">
+            <i class="fas fa-save"></i>
+            Save
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #input_modal_user let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="add-user">{{modalName}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">×</button>
+    </div>
+    <div class="modal-body">
+        <form class="form-material" [formGroup]="formAddUser">
+            <div class="form-group">
+                <label for="name-user">First Name</label>
+                <input type="text" id="name-user" name="name-user" formControlName="name_user" class="form-control form-control-line"
+                    [(ngModel)]="userModel.first_name">
+            </div>
+            <div class="form-group">
+                <label for="last-name-input">Last Name</label>
+                <input type="text" id="last-name-input" name="last-name-input" formControlName="last_name_input" class="form-control form-control-line"
+                    [(ngModel)]="userModel.last_name">
+            </div>
+            <div class="form-group">
+                <label for="phone-input">Phone </label>
+                <input type="text" id="phone-input" name="phone-input" formControlName="phone_input" class="form-control"
+                    placeholder="" [(ngModel)]="userModel.phone"></div>
+            <div class="form-group">
+                <label for="email-input">Email </label>
+                <input type="email" id="email-input" name="email-input" formControlName="email_input" class="form-control"
+                    placeholder="" [(ngModel)]="userModel.email" [disabled]="disableEdit"></div>
+            <div class="form-group">
+                <label for="email-confirm-input">Confirm Email </label>
+                <input type="email" id="email-confirm-input" name="email-confirm-input" formControlName="email_confirm_input"
+                    class="form-control" placeholder="" [(ngModel)]="userModel.emailConfirm" [disabled]="disableEdit">
+            </div>
+            <div class="form-group">
+                <label for="password-input">Password</label>
+                <input type="password" id="password-input" name="password-input" formControlName="password_input" class="form-control"
+                    value="" [(ngModel)]="userModel.password" [disabled]="disableEdit"></div>
+            <div class="form-group">
+                <label for="password-confirm-input">Confirm Password</label>
+                <input type="password" id="password-confirm-input" name="password-confirm-input" formControlName="password_confirm_input"
+                    class="form-control" [(ngModel)]="userModel.passConfirm" value="" [disabled]="disableEdit">
+            </div>
+            <div class="form-group">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-cancel-list waves-effect text-left" (click)="modal.close('Save click')">
+            <i class="fas fa-window-close"></i>
+            Close
+        </button>
+        <button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-target=".bs-modal-map2"
+            (click)="saveEdit('User')"><i class="far fa-address-card"></i>Add User</button>
+    </div>
+</ng-template>
+
+<ng-template #contentDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Are you Sure you want to Delete?</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">×</button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-cancel-list waves-effect text-left" (click)="modal.close('Save click')">Close</button>
+        <button class="btn btn-primary float-right" data-toggle="modal" data-target=".bs-modal-map2">Delete</button>
+    </div>
+</ng-template>

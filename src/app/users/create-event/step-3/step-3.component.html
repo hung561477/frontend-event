@@ -1,0 +1,76 @@
+<section id="steps-uid-0-p-2" role="tabpanel" class="body current" [formGroup]="step3">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="card-title">Event image(s) <span class="text-danger">*</span></h4>
+        </div>
+        <div class="set-width" *ngFor="let i of domObj; let e = index" [attr.id]="i.id">
+            <h2 class="text-danger" *ngIf="isErrorImage">Full Size</h2>
+            <div class="file-upload">
+                <p class="text-danger text-center" *ngIf="submittedImage && urlImgArray.length === 0 && domObj[0].base64 === ''">At least 1 image
+                    must be uploaded</p>
+                <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+                    Image</button>
+                <div class="image-upload-wrap" *ngIf="i.hide">
+                    <input class="file-upload-input" type='file' (change)="readURL($event, i, e);" accept="image/*" />
+                    <div class="drag-text">
+                        <h3>Drag and drop or select add Image</h3>
+                    </div>
+                </div>
+                <div class="file-upload-content" *ngIf="!i.hide">
+                    <img class="file-upload-image" *ngIf="i.base64" src="{{i.base64}}" alt="your image" />
+                    <img class="file-upload-image" *ngIf="!i.base64 && i.url" src="{{i.url}}" alt="your image" />
+                    <div class="image-title-wrap">
+                        <button type="button" (click)="removeUploadFile(i)" class="remove-image">Remove</button>
+                    </div>
+                </div>
+                <div *ngIf="i.process === 200" class="text-success">Upload successful</div>
+                <p class="text-warning">Maximum upload file size: 5MB.</p>
+            </div>
+            <button class="btn btn-danger float-right btn-corner" *ngIf="i.id !== null && urlImgArray.length > 1" type="button"
+                (click)="removeUploadFile(e)">
+                <i class="fa fa-minus"></i></button>
+            <progress-bar *ngIf="i.process > 0 && i.process <= 101 " [progress]="i.process" [color]="'#488aff'">
+            </progress-bar>
+        </div>
+        <div class="set-width">
+            <div class="p-10">
+                <button class="btn btn-success" type="button" (click)="addDom()"><i class="fas fa-plus"></i> Add More
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label> Add activities </label>
+                <div class="input-group m-b-30">
+                    <tag-input [theme]="'bootstrap'" [placeholder]="'Add Activities'" formControlName="activities"
+                        [secondaryPlaceholder]="'Add Activities'" (onAdd)="onAdd($event)" (onRemove)="onRemove($event)"
+                        [(ngModel)]='items' name="Activities" [addOnBlur]="true">
+                    </tag-input>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4 class="card-title">Event Amenities</h4>
+            <div class="selectable-icon" *ngFor="let item of dataAmenties">
+                <button [ngClass]="item.status? 'btn waves-effect waves-light amenities-click active2': 'btn waves-effect waves-light amenities-click'"
+                    type="button" (click)="onActive(item.status, item.id, item.name)"><span class="btn-label"><i class="{{item.icon}}"></i></span>{{item.name}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4 class="card-title">Event Activations</h4>
+            <div class="selectable-icon" *ngFor="let item of dataActivations">
+                <button [ngClass]="item.status? 'btn waves-effect waves-light amenities-click active2': 'btn waves-effect waves-light amenities-click'"
+                    (click)="onActivations(item.status, item.id, item.name)" type="button"><span class="btn-label"><i
+                            class="{{item.icon}}"></i></span>{{item.name}}</button>
+            </div>
+        </div>
+    </div>
+
+    <a class="links" (click)="goContact()"> Not on here? Contact us to add it.</a>
+</section>

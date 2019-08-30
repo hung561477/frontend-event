@@ -1,0 +1,25 @@
+<!-- <ul>
+  <li *ngFor="let menu of menu">
+    <a [routerLink]="[menu.url]" (click)="_toggleSidebar(menu.id)">{{menu.title}}</a>
+  </li>
+</ul>
+<div class="sponsor">
+  <p>sponsorship marketplace</p>
+</div>
+<div class="footer-menu">
+  <h4>event Pte Ltd © All Rights Reserved</h4>
+</div> -->
+
+<div class="nav js-nav active">
+  <ul class="nav__list">
+    <li class="nav__item"><a [ngClass]="(isActive === 0)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(0)">Home</a></li>
+    <li class="nav__item"><a [ngClass]="(isActive === 1)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(1)">Marketer</a></li>
+    <li class="nav__item"><a [ngClass]="(isActive === 2)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(2)"> Event Organiser</a></li>
+    <li class="nav__item"><a [ngClass]="(isActive === 3)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(3)">The eventdables</a></li>
+    <li class="nav__item"><a [ngClass]="(isActive === 4)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(4)">About</a></li>
+    <li class="nav__item"><a [ngClass]="(isActive === 5)? 'link js-link-to active':'link js-link-to'" (click)="goSlide(5)">Contact</a></li>
+  </ul>
+  <div class="nav__web">
+    <div class="nav__web-span">Sponsorship </div><a href="" target="_blank" class="link link--red">Marketplace</a>
+  </div>
+</div>

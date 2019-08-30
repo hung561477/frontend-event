@@ -1,0 +1,49 @@
+<section>
+    <div class="card">
+        <div class="card-body">
+            <p class="text-danger text-center" *ngIf="validInventory">At
+                least 1 Inventory
+                must be uploaded</p>
+            <h4 class="card-title">Inventory Table
+                <a (click)="openModal(0)" class="btn btn-outline-info waves-effect waves-light float-right"><span class="btn-label"><i
+                            class="far fa-file-image"></i></span>Add
+                    Inventory</a>
+                <a (click)="openModal(1)" class="btn btn-outline-info waves-effect waves-light float-right mr-btn-5"><span
+                        class="btn-label"><i class="far fa-file-image"></i></span>This event is my only inventory</a>
+            </h4>
+            <div bsModal #lgModal="bs-modal" class="modal fade" [config]="config" tabindex="-1" role="dialog"
+                aria-labelledby="dialog-static-name" aria-hidden="true" id="inventEvent">
+                <event-modal-enventory *ngIf="isActive" [valueInput]="lgModal"></event-modal-enventory>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Inventory Name</th>
+                            <th>Budget</th>
+                            <th>Deadline</th>
+                            <th>In Kind sponsorship</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dataTable; let i = index">
+                            <td><span class="label label-danger">{{item.name}}</span>
+                            </td>
+                            <td>{{item.budget_from}} - {{item.budget_to}}</td>
+                            <td>{{item.sponsorship_deadline | date: 'MM/dd/yyyy'}}</td>
+                            <td><span *ngFor="let kind of item.kind_sponsorship">
+                                    <i *ngIf="kind.value === 'true' || kind.value === true">Yes</i>
+                                    <i *ngIf="kind.value === 'false' || kind.value === false">No</i>
+                                </span></td>
+                            <td>
+                                <a (click)="editObj(i, item, template)"><i class="far fa-edit"></i></a>
+                                <a (click)="delObj(i, item)"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,7 @@
+<div *ngIf="isActive">
+    <h1>Welcome to event! You can now login to your account</h1>
+</div>
+<div *ngIf="!isActive">
+    <h1>Verify Expire</h1>
+</div>
+<button (click)="backHome()">My event account</button>

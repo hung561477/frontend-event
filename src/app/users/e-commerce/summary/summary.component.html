@@ -1,0 +1,123 @@
+<div class="row m-t-10">
+  <div class="col-1 b-r  dashboard-table">
+
+    <h4 class="wishlist-bg">Wishlist</h4>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light wishlist">Av Age</h6><b class="wishlist">{{dataSummary.wishlist.age | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light wishlist">Av. Budget</h6><b>{{dataSummary.wishlist.budget*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light wishlist">Atendees</h6><b>{{dataSummary.wishlist.atendees | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light wishlist">Per Person Cost</h6><b>{{dataSummary.wishlist.cost*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-3 p-10 dashboard-progress-bar">
+    <b class="m-t-10">Male <span> {{dataSummary.wishlist.gender.male | number:'1.0-0'}} %</span></b>
+    <div class="progress ">
+      <div class="progress-bar bg-infos wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.wishlist.gender.male+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.wishlist.gender.male}}% Complete</span> </div>
+    </div>
+    <b class="m-t-10">Female <span>{{dataSummary.wishlist.gender.female | number:'1.0-0'}} %</span></b>
+    <div class="progress">
+      <div class="progress-bar bg-danger wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.wishlist.gender.female+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.wishlist.gender.female | number:'1.0-0'}}% Complete</span> </div>
+    </div>
+  </div>
+</div>
+<div class="row m-t-30">
+  <div class="col-1 b-r  dashboard-table">
+
+    <h4 class="reserved-bg">Reserved</h4>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light reserved">Av Age</h6><b class="reserved">{{dataSummary.reserved.age | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light reserved">Av. Budget</h6><b>{{dataSummary.reserved.budget*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light reserved">Atendees</h6><b>{{dataSummary.reserved.atendees | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light reserved">Per Person Cost</h6><b>{{dataSummary.reserved.cost*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-3 p-10 dashboard-progress-bar">
+    <b class="m-t-10">Male <span> {{dataSummary.reserved.gender.male | number:'1.0-0'}} %</span></b>
+    <div class="progress ">
+      <div class="progress-bar bg-infos wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.reserved.gender.male+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.reserved.gender.male | number:'1.0-0'}}% Complete</span> </div>
+
+    </div>
+    <b class="m-t-10">Female <span>{{dataSummary.reserved.gender.female | number:'1.0-0'}} %</span></b>
+    <div class="progress">
+      <div class="progress-bar bg-danger wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.reserved.gender.female+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.reserved.gender.female | number:'1.0-0'}}% Complete</span> </div>
+    </div>
+  </div>
+</div>
+<div class="row m-t-30">
+  <div class="col-1 b-r  dashboard-table">
+
+    <h4 class="completed-bg">Completed</h4>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light completed">Av Age</h6><b class="completed">{{dataSummary.completed.age | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light completed">Av. Budget</h6><b>{{dataSummary.completed.budget*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light completed">Atendees</h6><b>{{dataSummary.completed.atendees | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light completed">Per Person Cost</h6><b>{{dataSummary.completed.cost*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-3 p-10 dashboard-progress-bar">
+    <b class="m-t-10">Male <span> {{dataSummary.completed.gender.male | number:'1.0-0'}} %</span></b>
+    <div class="progress ">
+      <div class="progress-bar bg-infos wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.completed.gender.male+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.completed.gender.male | number:'1.0-0'}}% Complete</span> </div>
+
+    </div>
+    <b class="m-t-10">Female <span>{{dataSummary.completed.gender.female | number:'1.0-0'}} %</span></b>
+    <div class="progress">
+      <div class="progress-bar bg-danger wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.completed.gender.female+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.completed.gender.female | number:'1.0-0'}}% Complete</span> </div>
+    </div>
+  </div>
+</div>
+<div class="row m-t-30 m-b-15">
+  <div class="col-1 b-r  dashboard-table">
+
+    <h4 class="total-bg">Total</h4>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light total">Av Age</h6><b class="total">{{dataSummary.total.age | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light total">Av. Budget</h6><b>{{dataSummary.total.budget*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light total">Atendees</h6><b>{{dataSummary.total.atendees | number:'1.0-0'}}</b>
+  </div>
+  <div class="col-2 p-10 b-r">
+    <h6 class="font-light total">Per Person Cost</h6><b>{{dataSummary.total.cost*rateExchange | currency: pipeRate : 'symbol' : '1.0'}}</b>
+  </div>
+  <div class="col-3 p-10 dashboard-progress-bar">
+    <b class="m-t-10">Male <span> {{dataSummary.total.gender.male | number:'1.0-0'}} %</span></b>
+    <div class="progress ">
+      <div class="progress-bar bg-infos wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.total.gender.male+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.total.gender.male | number:'1.0-0'}}% Complete</span> </div>
+
+    </div>
+    <b class="m-t-10">Female <span>{{dataSummary.total.gender.female | number:'1.0-0'}} %</span></b>
+    <div class="progress">
+      <div class="progress-bar bg-danger wow animated progress-animated" [ngStyle]="{height: '6px', width: dataSummary.total.gender.female+'%'}" role="progressbar">
+        <span class="sr-only">{{dataSummary.total.gender.female | number:'1.0-0'}}% Complete</span> </div>
+    </div>
+  </div>
+</div>

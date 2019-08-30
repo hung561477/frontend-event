@@ -1,0 +1,294 @@
+.md-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+.text-alert {
+    color: red;
+    padding: 10px 20px !important;
+}
+
+.password-icon {
+    color: #5f93cc;
+    position: absolute;
+    right: 30px;
+    top: 37px;
+    font-size: 26px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.white-bg {
+    background: #fff;
+    h3 {
+        margin: 0;
+        font-size: 44px;
+        color: #e86663;
+        padding: 6px;
+        border-radius: 3px 3px 0 0;
+        font-weight: 300;
+        text-align: center;
+    }
+}
+
+[class*=col-] {
+    float: left;
+    padding: 0 20px;
+}
+
+.custom-modal {
+    background: url(../../../../assets/video.png) no-repeat;
+    .input-custom {
+        height: 58px;
+        border-radius: 30px;
+        background: #ffffff57;
+        color: #fff;
+        padding: 0 30px;
+        border: none;
+        &::placeholder {
+            color: #d5d9e2;
+        }
+    }
+    .btn-cancel {
+        width: 100%;
+        color: #fff;
+        font-size: 21px;
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 30px;
+    }
+    .custom-btn {
+        background: #3ce8b0;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 0;
+        font-size: 22px;
+    }
+}
+
+.md-content {
+    min-height: 100%;
+    color: #fff;
+    background: url('../../../../assets/video.png') #2d2d2d;
+    position: relative;
+    border-radius: 3px;
+    margin: 0 auto;
+    min-height: 100%;
+    background-size: cover;
+    .img-bg {
+        margin: 0;
+        font-weight: 300;
+        font-size: 18px;
+        background-size: cover;
+        padding: 20px 40px 10px;
+        h3 {
+            margin: 0;
+            font-size: 44px;
+            color: #e86663;
+            padding: 18px;
+            border-radius: 3px 3px 0 0;
+            font-weight: 300;
+            text-align: center;
+            button {
+                display: block;
+                margin: 0 auto;
+                font-size: .8em;
+                position: fixed;
+                right: 16px;
+                top: 20px;
+                color: #fff;
+                background: 0 0;
+                border: none;
+            }
+        }
+    }
+    .row-fix {
+        padding: 15px 40px 30px;
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.15em;
+    }
+    .register-btn {
+        background: #ff8b7f;
+        color: #fff;
+        transition: all ease .3s;
+        border-radius: 2px;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 50px;
+        padding: 0 15px;
+        height: 50px;
+        text-transform: uppercase;
+        &:hover {
+            background: rgba(255, 139, 127, 0.8);
+        }
+    }
+    .register-cancel-btn {
+        border: 2px solid #ec8b8b;
+        color: #ec8b8b;
+        margin-bottom: 15px;
+        border-radius: 2px;
+        transition: all ease .3s;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 50px;
+        padding: 0 15px;
+        height: 50px;
+        text-transform: uppercase;
+        cursor: pointer;
+        &:hover {
+            background: #ec8b8b;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+    .cbox-bg {
+        p {
+            margin: 0;
+            padding: 10px 0;
+            input[type=checkbox],
+            input[type=radio] {
+                box-sizing: border-box;
+                padding: 0;
+            }
+            input[type="checkbox"],
+            input[type="radio"] {
+                position: absolute;
+                opacity: 0;
+                z-index: -1;
+            }
+            input[type="checkbox"]:checked+label::after,
+            input[type=radio]:checked+label::after {
+                -webkit-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
+            input[type="checkbox"]+label::after,
+            input[type=radio]+label::after {
+                -webkit-transform: scale(0);
+                -ms-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+            }
+            input[type="checkbox"]+label::after {
+                content: "\2714";
+                color: #5f93cc;
+                line-height: 1.5;
+                text-align: center;
+            }
+        }
+        label {
+            position: relative;
+            display: inline-block;
+            padding: 0 0 0 2em;
+            height: 1.5em;
+            line-height: 1.5;
+            color: #5f93cc;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            &::before {
+                content: " ";
+                border: 2px solid #bdc3c7;
+                color: #5f93cc;
+                border-radius: 20%;
+            }
+            &::before,
+            &::after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                color: #5f93cc;
+                width: 1.5em;
+                height: 1.5em;
+                transition: .25s all ease;
+            }
+        }
+    }
+    div {
+        p {
+            margin: 0;
+            padding: 10px 0;
+        }
+    }
+    .form1-bg {
+        float: left;
+        width: 100%;
+        .form-control-label {
+            font-size: 15px;
+            margin-bottom: 3px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.8);
+        }
+        .form-control {
+            background: #e9eaec;
+            border-radius: 2px;
+            padding: 17px 10px;
+            border: none;
+            border-bottom: 3px solid #273655;
+            &:focus {
+                background: #d5d9e2;
+                border-bottom: 3px solid #264179;
+            }
+        }
+        .has-success {
+            .form-control-label {
+                color: #21a569;
+            }
+            .form-control {
+                background: rgba(78, 156, 107, 0.2);
+                border-bottom: 3px solid #21a569;
+                transition: all ease 0.3s;
+            }
+        }
+        .has-danger {
+            .form-control-label {
+                color: rgb(222, 76, 76);
+            }
+            .form-control {
+                border: none;
+                background: rgba(212, 120, 120, 0.2);
+                border-bottom: 3px solid rgb(222, 76, 76);
+                transition: all ease 0.3s;
+                border-radius: 2px;
+                padding: 12px 10px;
+            }
+        }
+        svg {
+            color: #5f93cc;
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all ease 0.3s;
+        }
+    }
+}
+
+.text-fix {
+    color: #fff;
+    font-size: 18px;
+}
+
+.filter-grey {
+    background: rgba(24, 24, 24, 0.4);
+}
+
+.img-fix-haft {
+    width: 50%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+}

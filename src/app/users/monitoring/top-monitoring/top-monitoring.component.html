@@ -1,0 +1,37 @@
+<div class=" main-sub-menu">
+  <h3 class="sub-header-text" *ngIf="role === 'BUYER'">Monitoring</h3>
+  <h3 class="sub-header-text" *ngIf="role === 'SELLER'">Recent EVENT</h3>
+  <ul>
+      <li class="reserved" *ngIf="role === 'SELLER'">
+          <a [ngClass]="(id === 4)? 'green-bg hvr-rectangle-out active': 'green-bg hvr-rectangle-out'" (click)="addClass(5)">
+            <span>Available</span><i class="fas fa-weight"></i>
+            <h4>{{countOngoing}}</h4>
+          </a>
+        </li>
+    <li class="reserved" *ngIf="role === 'BUYER'">
+      <a [ngClass]="(id === 4)? 'reserved-bg hvr-rectangle-out active': 'reserved-bg hvr-rectangle-out'" (click)="addClass(4)">
+        <span>Reserved</span><i class="far fa-bell"></i>
+        <h4>{{countRes}}</h4>
+      </a>
+    </li>
+    <li class="wishlist" *ngIf="role === 'BUYER'">
+      <a [ngClass]="(id === 3)? 'wishlist-bg active': 'wishlist-bg'" (click)="addClass(3)">
+        <span>wishlist</span><i class="far fa-bell"></i>
+        <h4>{{countWish}}</h4>
+      </a>
+    </li>
+    <li class="sold" *ngIf="role === 'SELLER'">
+      <a [ngClass]="(id === 2)? 'sold-bg hvr-rectangle-out active': 'sold-bg hvr-rectangle-out'" (click)="addClass(2)">
+        <span>Sold</span><i class="fas fa-check-circle"></i>
+        <h4>{{countSold}}</h4>
+      </a>
+    </li>
+    <li class="show-all">
+      <a [ngClass]="(id === 1)? 'show-all-bg hvr-rectangle-out active': 'show-all-bg hvr-rectangle-out'" (click)="addClass(1)">
+        <span>show All</span><i class="far fa-bell"></i>
+        <h4>{{countAll}}</h4>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="clearfix"></div>

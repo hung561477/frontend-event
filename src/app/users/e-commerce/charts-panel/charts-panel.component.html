@@ -1,0 +1,25 @@
+<nb-card size="large">
+  <!-- <nb-tabset fullWidth (changeTab)="changeTab($event)">
+    <nb-tab> -->
+      <div class="row reset-pd">
+        <div class="col-sm-6">
+          <h4 class="card-title">Budget vs Atendees</h4>
+          <h6 class="card-subtitle">Overview of Events</h6>
+        </div>
+        <div class="col-sm-6">
+          <div class="text-center">
+            <ul class="list-inline">
+              <li>
+                <h6 class=" reserved"><i class="fa fa-circle font-10 m-r-10 "></i>Reservd</h6> </li>
+              <li>
+                <h6 class=" wishlist"><i class="fa fa-circle font-10 m-r-10"></i>Wishlist</h6> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <event-orders-chart #ordersChart [ordersChartData]="ordersChartData"></event-orders-chart>
+      </div>
+    <!-- </nb-tab>
+  </nb-tabset> -->
+</nb-card>

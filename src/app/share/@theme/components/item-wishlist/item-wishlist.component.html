@@ -1,0 +1,120 @@
+<div class="searched-box-bg">
+
+    <div class="row m-0 searched-box-bg-inner">
+        <div class="col-12 col-md-6 event-detail" (click)="goEvent(completed.event.id)">
+            <h2 class="text-default">{{completed.name}} </h2>
+        </div>
+        <div class="col-12 col-md-6">
+            <p class="text-default">Keywords: <span class="tags" *ngFor="let itemTag of this.tag">{{itemTag}}</span></p>
+        </div>
+        <div class="col-5 col-sm-4 col-lg-3 p-0 event-detail" (click)="goEvent(completed.event.id)">
+
+            <div class="ribbon2 wishlist-bg" *ngIf="completed.userStatus === 'WISHLIST'">
+                <span class="ribbon-text1">In Wishlist</span>
+            </div>
+            <div class="ribbon2 sold-bg" *ngIf="completed.userStatus === 'SOLD'">
+                <span class="ribbon-text1">Sold</span>
+            </div>
+            <div class="ribbon2 green-bg" *ngIf="completed.userStatus === 'ONGOING'">
+                <span class="ribbon-text1">Ongoing</span>
+            </div>
+            <div class="ribbon2 available-bg" *ngIf="completed.userStatus === undefined || completed.userStatus === ''">
+                <span class="ribbon-text1">Available</span>
+            </div>
+            <div class="ribbon2 reserved-bg" *ngIf="completed.userStatus === 'RESERVED'">
+                <span class="ribbon-text1">Reserved</span>
+            </div>
+            <carousel *ngIf="dataImg">
+                <slide *ngFor="let item of dataImg">
+                    <img [src]="item.image" alt="first slide" class="img-fluid">
+                </slide>
+            </carousel>
+        </div>
+        <div class="col-7 col-sm-8 col-lg-9 p-0">
+            <div class="row m-0 ">
+                <div class="col-sm-6 p-0 searched-box-text event-detail" (click)="goEvent(completed.event.id)">
+                    <div>
+                        <p>{{completed.description}} </p>
+                        <p><span class="mrr-5">Start: </span>
+                            <span>{{ completed.date_from | date : 'd MMMM y'}}</span> 
+                            <span class="mrr-5 mrl-5">End: </span>
+                            <span>{{ completed.date_to | date : 'd MMMM y'}} </span>
+                        </p>
+
+                        <p>Niche audience profile <span class="ml-5">Total attendees: </span><span>{{completed.size}}</span></p>
+                    </div>
+                </div>
+                <div class="col-sm-6 p-0 searched-box-text">
+                    <h3 class="text-sm-right">Sponsorship value: {{completed.budget_to}} USD</h3>
+                    <h3 class="text-sm-right">In-kind sponsorship:
+                        <span *ngIf="completed.kind_sponsorship[0].value">Yes</span>
+                        <span *ngIf="!completed.kind_sponsorship[0].value">No</span>
+                    </h3>
+                    <h3 class="text-sm-right">Sponsorship Deadline: {{completed.sponsorship_deadline | date : 'd MMMM
+                        y'}}</h3>
+                </div>
+            </div>
+            <div class="row m-0 ">
+                <div class="col-sm-8 p-0 searched-box-text2 event-detail" (click)="goEvent(completed.event.id)">
+                    <p><span>Age range: </span><span>{{completed.age?.from}}-{{completed.age?.to}}</span></p>
+                    <p><span>Gender: </span>
+                        <span class="ml-5"><i class="fas fa-mars"></i> {{completed.gender?.male}}%</span>
+                        <span class="ml-5"><i class="fas fa-venus"></i> {{completed.gender?.female}}%</span>
+                        <span class="ml-5"><i class="fas fa-question-circle"></i> {{completed.gender?.order}}%</span>
+                    </p>
+                    <p><span>Profiles: </span>
+                        <span *ngFor="let item of completed.career" class="ml-5">{{item.name}} </span>
+                    </p>
+                    <p><span>Civil status: </span>
+                        <span class="ml-5">{{completed.civil?.single}}% Single</span>
+                        <span class="ml-5">{{completed.civil?.married}}% Married</span>
+                        <span class="ml-5">{{completed.civil?.separated}}% Unknown</span>
+                    </p>
+                    <p><span>Average house income:</span>
+                        <span class="ml-5">{{completed.household_income?.to}} USD</span>
+                    </p>
+                    <p><span>Coming from: </span>
+                        <span class="ml-5" *ngIf="completed.residence_location?.international">International</span>
+                        <span class="ml-5" *ngIf="completed.residence_location?.local">Local</span>
+                        <span class="ml-5" *ngIf="completed.residence_location?.national">National</span>
+                        <span class="ml-5" *ngIf="completed.residence_location?.regional">Regional</span>
+                    </p>
+                </div>
+                <div class="col-sm-4 p-0 event-search-btn-bg">
+                    <!-- <h2 class="text-center {{completed.name}}">
+                        {{time}} Days to go
+                    </h2> -->
+                    <div class="d-flex flex-row" *ngIf="completed.userStatus === 'ONGOING'">
+                        <div class="align-self-center m-l-30">
+                            <h3 class="m-b-0 text-info"><i class="fas fa-eye text-info"></i> 41 </h3>
+                            <h5 class="text-muted m-b-0">Views</h5>
+                        </div>
+                        <div class="align-self-center m-l-30">
+                            <h3 class="m-b-0 text-warning"><i class="fa fa-heart text-warning"></i> 28 </h3>
+                            <h5 class="text-muted m-b-0">Wishlists</h5>
+                        </div>
+                    </div>
+                    <div class="sold-text text-center" *ngIf="completed.userStatus === 'SOLD'" ngbTooltip="It's sold out. But keep watching may be it can unreserve"
+                        tooltipClass="my-custom-class">
+                        <i class="far fa-clock"></i>
+                        <h4>JUST MISSED IT!</h4>
+                    </div>
+                    <button class="reserved-bt reserved-bg btn-border-r2 waves-effect waves-dark hvr-shutter-out-vertical"
+                        *ngIf="role !== 'SELLER' && completed.userStatus != 'SOLD' && completed.userStatus != 'ONGOING' && completed.userStatus != 'RESERVED'"
+                        (click)="addWishlist(completed.id, 'RESERVED'); $event.stopPropagation();">Reserve</button>
+                    <button class="btn-border-r1 add-towish-list waves-effect waves-dark hvr-shutter-out-vertical"
+                        *ngIf="role !== 'SELLER' && completed.userStatus != 'WISHLIST' && completed.userStatus != 'RESERVED' && completed.userStatus != 'ONGOING' && completed.userStatus != 'SOLD'  || completed.userStatus === undefined || completed.userStatus === ''"
+                        (click)="addWishlist(completed.id, 'WISHLIST'); $event.stopPropagation();">Add
+                        to wishlist</button>
+                    <button ngbTooltip="Remove from reserved" tooltipClass="my-custom-class" *ngIf="role !== 'SELLER' && completed.userStatus === 'RESERVED'"
+                        class="reserved-cancel btn-border-r1 waves-effect waves-dark hvr-shutter-out-vertical" (click)="removeWishlist(completed.id); $event.stopPropagation();">
+                        <i class="far fa-times-circle"></i>Release</button>
+                    <button ngbTooltip="Remove from wishlist" tooltipClass="my-custom-class" *ngIf="role !== 'SELLER' && completed.userStatus === 'WISHLIST'"
+                        class="reserved-cancel btn-border-r1 waves-effect waves-dark hvr-shutter-out-vertical" (click)="removeWishlist(completed.id); $event.stopPropagation();">
+                        Remove from Wishlist</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

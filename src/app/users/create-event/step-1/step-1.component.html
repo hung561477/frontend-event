@@ -1,0 +1,123 @@
+<section class="body current" [formGroup]="step1">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="wfirstName2"> Event Name<span class="text-danger">*</span>
+                </label>
+                <input type="text" formControlName="name" class="form-control required" id="wfirstName2" name="event name"
+                    (keyup)="onKey($event)">
+                <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors.required" class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label> Location<span class="text-danger">*</span></label>
+                <div class="input-group m-b-30">
+                    <input (keyup)="onLocation($event)" type="text" placeholder="ie hotel, stadium, park, school, club, restaurant, outlet..."
+                        formControlName="location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
+                        #search>
+                    <div *ngIf="submittedLocation && locationVali && f['location'].value === ''" class="invalid-feedback">
+                        <div class="text-danger">This field is required.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label> Venue(s) <span class="text-danger">*</span></label>
+                <div class="input-group m-b-30">
+                    <tag-input [theme]="'bootstrap'" formControlName="venue" [secondaryPlaceholder]="'ie grand ballroom, private terrace, pool bar, 8th floor...'"
+                        [placeholder]="'ie grand ballroom, private terrace, pool bar, 8th floor...'" [(ngModel)]='itemsVenue'
+                        name="Venue" [addOnBlur]="true">
+                    </tag-input>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label> Date(s) & Time(s)<span class="text-danger">*</span></label>
+            <div class="form-group input-group mb-3">
+                <input type="text" name="datetimes" class="form-control datetime required abc" [(ngModel)]='valueDateRange'
+                    formControlName="datepicker" />
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Edition <span class="text-danger">*</span></label>
+                <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected">
+                    <input class="form-control" type="number" min="0" [(ngModel)]='edition' formControlName="edition"
+                        (keyup)="onEdition($event)" (change)="onEdition($event)" (keydown.ArrowUp)="onEdition($event)"
+                        (keydown.ArrowDown)="onEdition($event)">
+                </div>
+                <div *ngIf="submittedEdition && validEdition === 0" class="invalid-feedback">
+                    <div class="text-danger">This field is required to be greater than 0.</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="wdate2">Sponsorship deadline<span class="text-danger">*</span></label>
+                <input type="text" class="form-control required" id="datepicker" size="30" formControlName="deadline"
+                    (keyup)="onDeadline($event)" (change)="onDeadline($event)">
+                <!-- <input (keyup)="onDeadline($event)" (change)="onDeadline($event)" type="date" class="form-control required" id="wdate2"
+                    formControlName="deadline"> -->
+                <div *ngIf="submittedDeadline && deadlineVali && dateDeadlineValid === ''" class="invalid-feedback">
+                    <div class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Average ticket price</label>
+                <input type="text" class="form-control required" formControlName="avg">
+                <span _ngcontent-c11="" class="prec1">USD</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="webUrl3"> Event URL</label>
+                <input type="url" class="form-control required" id="webUrl3" name="firstName" formControlName="url"
+                    (keyup)="onKeyUrl($event)">
+                <div *ngIf="submittedUrl && f['url'].errors" class="invalid-feedback">
+                    <div class="text-danger">Please enter a valid URL.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="shortDescription3">Short description<span class="text-danger">*</span></label>
+                <textarea name="shortDescription" id="shortDescription3" rows="6" class="form-control required"
+                    formControlName="description" (keyup)="onKeyDes($event)"></textarea>
+                <div *ngIf="submittedDes && f['description'].errors" class="invalid-feedback">
+                    <div *ngIf="f['description'].errors.required" class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Social Media </label>
+                <div class="input-group m-b-30">
+                    <tag-input [theme]="'bootstrap'" formControlName="media" [placeholder]="'Add the social media links of your event and/or company'"
+                        [secondaryPlaceholder]="'Add the social media links of your event and/or company'" [(ngModel)]='itemsSocial'
+                        name="Social Link" [addOnBlur]="true">
+                    </tag-input>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

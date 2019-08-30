@@ -1,0 +1,49 @@
+.card-no-border {
+    .card {
+        border-color: #dadada;
+        border-radius: 0px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.card {
+    margin-bottom: 30px;
+    border-radius: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.border-wishlist {
+    border-top: 4px solid #d3b229;
+}
+
+.p-r-0 {
+    padding-right: 0px;
+}
+
+.align-self-center {
+    -ms-flex-item-align: center !important;
+    align-self: center !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0px;
+}
+
+.medium-text {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.wishlist {
+    color: #d3b229;
+}
+
+.large-text {
+    font-size: 28px;
+    font-weight: 400;
+    position: relative;
+    float: right;
+    margin-right: 5px;
+    top: 8px;
+}

@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Not Published<a (click)="goRecentEvent()" class="btn btn-outline-info waves-effect waves-light float-right"><span
+          class="btn-label"><i class="far fa-file-image"></i></span>View All</a></h4>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Inventory</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of notPublished">
+            <td>{{item.name}}</td>
+            <td>Inventory1</td>
+            <td>{{item.sponsor_deadline | date:'MM/dd/yyyy'}}</td>
+            <td><a (click)="changePublish(item.id)" class="btn btn-xs btn-outline-success waves-effect waves-light"><i class="fas fa-certificate"></i>
+                Publish </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

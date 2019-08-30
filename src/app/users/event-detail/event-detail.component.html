@@ -1,0 +1,199 @@
+<event-top-event-detail></event-top-event-detail>
+<div class="clearfix"></div>
+<div class="row p-top-70 image-grid">
+    <!-- Column -->
+    <div class="row p-0 m-0 image-grid1">
+        <div class="col-lg-7 p-6 left-grid1">
+            <div class="row imge-grid-text-bg">
+                <div class="col-md-12">
+                    <div class="">
+                        <h2><span class="fix-mockup">{{eventDetail.name}}</span></h2>
+                        <h3><span class="fix-mockup">{{eventDetail.venue}}. {{locationName}}</span></h3>
+                        <p><span class="fix-mockup">{{eventDetail.date_from | date: 'd MMMM y'}}</span><span class="fix-mockup">{{time}}
+                                Days to Go</span></p>
+                    </div>
+                </div>
+
+                <div class="row searched-box-bg-inner">
+                    <h2 class="title-desc">EVENT DESCRIPTION</h2>
+                    <div [ngClass]="isCollapsed? 'col-12 collapsed': 'col-12'">
+                        <p class="description">{{eventDetail.description}}</p>
+                        <a class="read-more" (click)="isCollapsed = !isCollapsed">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row searched-box-bg-inner">
+                <div class="col-12">
+                    <h2 class="title-desc">EVENT DESCRIPTION</h2>
+                    <div [ngClass]="isCollapsed? 'col-12 collapsed': 'col-12'">
+                        <p class="description">{{eventDetail.description}}</p>
+                        <a class="read-more" (click)="isCollapsed = !isCollapsed">Read more</a>
+                    </div>
+
+                </div>
+            </div> -->
+            <carousel *ngIf="paramId !== 'preview'">
+                <slide *ngFor="let item of eventDetail.image">
+                    <img [src]="item.url" alt="first slide" class="img-fluid">
+
+                </slide>
+            </carousel>
+            <carousel *ngIf="paramId === 'preview'">
+                <slide *ngFor="let item of dataImg">
+                    <img *ngIf="item.url" [src]="item.url" alt="first slide" class="img-fluid">
+                    <img *ngIf="!item.url" [src]="eventDetail.images[0].file" alt="first slide" class="img-fluid">
+                </slide>
+            </carousel>
+        </div>
+
+        <div class="col-lg-5 p-0 left-grid2">
+            <div class="row reset-row">
+                <div class="col-12 p-6 m-0 left-grid3">
+                    <div class="imge-grid-text-bg background-pink">
+                        <h4 class="title-detail">Event Details</h4>
+                        <p><span><a href="{{eventDetail.url}}" target="_blank">{{eventDetail.url}}</a></span></p>
+                        <p><span>See map: </span><a (click)="open(content)"><i class="fas fa-map-marker-alt"></i></a></p>
+                        <!-- <p>
+                            <span class="deadline">Sponsorship deadline</span>
+                            <span class="deadline">{{eventDetail.sponsor_deadline | date: 'd MMMM y'}}</span>
+                        </p> -->
+                        <p class="event-social-links">
+                            <span>Social media:</span>
+                            <a *ngIf="isFacebook" class="btn btn-cus btn-facebook waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-facebook"></i>
+                            </a>
+                            <a *ngIf="isTwitter" class="btn btn-cus btn-twitter waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-twitter"></i>
+                            </a>
+                            <a *ngIf="isLinkedin" class="btn btn-cus btn-linkedin waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a *ngIf="isInsta" class="btn btn-cus btn-instagram waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-instagram"></i>
+                            </a>
+                            <a *ngIf="isPinterest" class="btn btn-cus btn-pinterest waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-pinterest"></i>
+                            </a>
+                            <a *ngIf="isYoutube" class="btn btn-cus btn-youtube waves-effect waves-light" href="{{eventDetail.social_link}}"
+                                target="_blank"> <i class="fab fa-youtube"></i>
+                            </a>
+                        </p>
+                        <p><span>Edition: </span>{{eventDetail.edition}}</p>
+
+                        <p><span>Average ticket price: </span>${{eventDetail.ticket_price}} USD</p>
+                        <br>
+                        <br>
+                        <!-- <h3>Location Amenities</h3>
+                        <p class="amenities-links">
+                            <a href="" title="Wifi" *ngFor="let item of eventAmentities"><i class="{{item.icon}}"></i></a>
+                        </p> -->
+                    </div>
+                    <!-- <img src="../../../assets/images/banner/674x379.png" class="img-fluid h-100" height="100%"> -->
+                </div>
+                <div class="col-12 p-6 left-grid4 min-h100">
+                    <div class="imge-grid-text-bg background-blue">
+                        <h4 class="title-detail">EXPECTED AUDIENCE</h4>
+                        <p><span>Total attendees: </span> <span>{{eventDetail.size}}</span></p>
+                        <p><span>Age range: </span><span>{{eventDetail.age?.from}}-{{eventDetail.age?.to}}</span></p>
+                        <p><span>Gender: </span>
+                            <span><i class="fas fa-mars"></i> {{eventDetail.gender?.male}}%</span>
+                            <span><i class="fas fa-venus"></i> {{eventDetail.gender?.female}}%</span>
+                            <span><i class="fas fa-question-circle"></i> {{eventDetail.gender?.order}}%</span>
+                        </p>
+                        <p><span>Profiles: </span>
+                            <span *ngFor="let item of eventDetail.career?.value">{{item.name}} </span>
+                        </p>
+                        <p><span>Civil status: </span>
+                            <span>{{eventDetail.civil?.single}}% Single</span>
+                            <span>{{eventDetail.civil?.married}}% Married</span>
+                            <span>{{eventDetail.civil?.separated}}% Unknown</span>
+                        </p>
+                        <p><span>Average house income:</span>
+                            <span>{{eventDetail.household_income?.to}} USD</span>
+                        </p>
+                        <p><span>Coming from: </span>
+                            <span *ngIf="eventDetail.residence_location?.international">International</span>
+                            <span *ngIf="eventDetail.residence_location?.local">Local</span>
+                            <span *ngIf="eventDetail.residence_location?.national">National</span>
+                            <span *ngIf="eventDetail.residence_location?.regional">Regional</span>
+                        </p>
+                    </div>
+                    <img src="../../../assets/images/banner/674x379.png" class="img-fluid h-100" height="100%">
+                </div>
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title" *ngIf="eventDetail.location !== null">{{eventDetail.location.name}}</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <agm-map style="height: 500px;" [latitude]="lng" [longitude]="lat" [zoom]="12">
+                            <agm-marker [latitude]="lng" [longitude]="lat"></agm-marker>
+                        </agm-map>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    <div class="row p-0 m-0 event-sub-details" style="width:100%">
+        <!-- Column -->
+        <div class="col-md-4 p-6">
+            <div class="card card-inverse card-info">
+                <div class="box text-center">
+                    <h1 class="font-light text-white" *ngIf="countActive === 1">Activity</h1>
+                    <h1 class="font-light text-white" *ngIf="countActive !== 1">Activities</h1>
+                    <span *ngFor="let item of active" class="text-white tag-in">{{item}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-4 p-6">
+            <div class="card card-primary card-inverse">
+                <div class="box text-center">
+                    <h1 class="font-light text-white">Amenities</h1>
+                    <span *ngFor="let item of eventDetail.amenities" class="text-white tag-in">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-4 p-6">
+            <div class="card card-lasted card-megna">
+                <div class="box text-center">
+                    <h1 class="font-light text-white">Activations</h1>
+                    <span *ngFor="let item of eventDetail.activations" class="text-white tag-in">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row p-0 m-0 inventory-list-bg" *ngIf="completed.inventory.length === 1">
+        <h2>Partnership Opportunities for this Event</h2>
+        <div *ngFor="let item of completed.inventory" class="w-100">
+            <event-item-mark [valueInput]="item"></event-item-mark>
+        </div>
+    </div>
+    <div class="row p-0 m-0 inventory-list-bg" *ngIf="paramId !== 'preview' && completed.inventory.length > 1">
+        <h2>Partnership Opportunities for this Event</h2>
+        <div *ngFor="let item of completed.inventory" class="w-100">
+            <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+        </div>
+    </div>
+    <div class="row p-0 m-0 inventory-list-bg" *ngIf="paramId === 'preview'">
+        <h2>Partnership Opportunities for this Event</h2>
+        <div *ngFor="let item of inventDetail" class="w-100">
+            <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+        </div>
+    </div>
+    <div class="col-lg-5 p-0 right-grid">
+
+
+    </div>
+
+</div>
+
+
+<toaster-container [toasterconfig]="config"></toaster-container>

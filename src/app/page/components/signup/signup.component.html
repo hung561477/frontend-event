@@ -1,0 +1,329 @@
+<div class="md-content" style="padding-left: 0; padding-right: 0;">
+    <h3>
+        <button class="md-close modal-top-close" (click)="valueInput.hide()">
+            <i class="fas fa-times"></i>
+        </button>
+    </h3>
+    <div class="row" style="padding-bottom: 0;">
+        <div class="offset-md-3 col-md-6 p-0 white-bg">
+            <h3>Sign up </h3>
+            <div class="col-6" style="display: inline-block">
+                <button [ngClass]="isActive? 'btn btn-block seller-bt1 active btn-active':'btn btn-block seller-bt1'"
+                    (click)="isActive = true" id="seller-bt1">Event Organiser
+                </button>
+            </div>
+            <div class="col-6" style="display: inline-block">
+                <button [ngClass]="!isActive? 'btn btn-block buyer-bt1 active btn-active':'btn btn-block buyer-bt1'"
+                    (click)="isActive = false" id="buyer-bt1">BRANDS and MARKETERS
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Seller sign up
+  ================================================== -->
+    <div id="seller-login" [ngClass]="isActive? 'row':'row d-none'">
+        <div class="offset-md-3 col-md-6 white-bg borders">
+            <form class="form-control-line m-t-40 form1-bg seller " [formGroup]="registerCompanyForm">
+                <div class="active-color"></div>
+                <div class="row p-m-0">
+                    <h4>Promote your events to the right brands</h4>
+                </div>
+                <div class="row p-m-0 bo-top">
+                    <div class="form-group validate-tb1 col-md-6">
+                        <div [ngClass]="{'has-success': isCompanyNameSeller === 1,'': isCompanyNameSeller < 1, 'has-danger': isCompanyNameSeller > 1}">
+                            <label class="form-control-label" for="company_name">Company Name <span class="danger-pass">*</span></label>
+                            <input type="text" class="form-control form-control-success" id="company_name" name="company_name"
+                                formControlName="name" (keyup)="companySeller($event)">
+                            <p class="txt-vali-company">{{validate.company.name}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group validate-tb2 col-md-6">
+                        <div [ngClass]="{'has-success': isAddress === 1,'': isAddress < 1, 'has-danger': isAddress > 1}">
+                            <label class="form-control-label" for="company_address">Address <span class="danger-pass">*</span></label>
+                            <input type="text" class="form-control form-control-warning" id="company_address" name="company_address"
+                                formControlName="address" (keyup)="addressSeller($event)">
+                            <p class="txt-vali-company">{{validate.company.address}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-m-0">
+                    <div class="form-group validate-tb3  col-md-6">
+                        <div [ngClass]="{'has-success': isWebsite === 1,'': isWebsite < 1, 'has-danger': isWebsite > 1}">
+                            <label class="form-control-label" for="company_website">Website <span class="danger-pass">*</span></label>
+                            <input type="text" class="form-control form-control-danger" id="company_website" name="company_website"
+                                formControlName="website" (keyup)="websiteSeller($event)">
+                            <p class="txt-vali-company">{{validate.company.website}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group validate-tb4 col-md-6">
+                        <div [ngClass]="{'has-success': isIndustry === 1,'': isIndustry < 1, 'has-danger': isIndustry > 1}">
+                            <label class="form-control-label" for="company_industry">Industry <span class="danger-pass">*</span></label>
+                            <input type="text" class="form-control form-control-success" id="company_industry" name="company_industry"
+                                formControlName="industry" (keyup)="industrySeller($event)">
+                            <p class="txt-vali-company">{{validate.company.industry}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-m-0">
+                    <div class="form-group  col-md-6">
+                        <div [ngClass]="{'has-success': isComDes === 1,'': isComDes < 1, 'has-danger': isComDes > 1}">
+                            <label class="form-control-label" for="company_description">Company Description <span class="danger-pass">*</span></label>
+                            <textarea type="text" class="form-control form-control-success text-area" id="company_description"
+                                formControlName="description" (keyup)="comDesSeller($event)"> </textarea>
+                            <p class="txt-vali-company">{{validate.company.description}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 md-top-m">
+                        <form class="form">
+                            <div class="file-upload-wrapper" style="margin-top: 1.9em;" [attr.data-text]="image.description"
+                                data-text="Company Logo">
+                                <input name="file-upload-field" type="file" class="file-upload-field" value="" (change)="inputFile($event)">
+                            </div>
+                            <p class="txt-vali-company">{{validate.company.image}}</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 p-0 ">
+                    <div class=" col-md-6 cbox-bg">
+                        <p><input type="checkbox" name="subscribe" (change)="checkboxCompany()" id="company_subscribe"
+                                formControlName="company_subscribe">
+                            <label for="company_subscribe">Subscribe to our newsletter</label></p>
+                    </div>
+                    <div class=" col-md-6 m-0 cbox-bg">
+                        <p><input type="checkbox" name="cb" id="company_accept_term" formControlName="company_accept_term"><label
+                                for="company_accept_term">Accept our <a href="#">terms &amp;
+                                    conditions</a></label></p>
+                    </div>
+                </div>
+                <div class="col-12 p-0 ">
+                    <div class="col-md-6 ">
+                        <button class="btn register-cancel-btn btn-block" (click)="valueInput.hide()">Cancel</button>
+                    </div>
+                    <div class="col-md-6 ">
+                        <button id="add-user" class="btn register-btn btn-block" [disabled]="!registerCompanyForm.getRawValue().company_accept_term"
+                            (click)="openModal(add_user_seller)">
+                            Register
+                            &amp; Add User
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Buyer sign up
+  ================================================== -->
+    <div [ngClass]="!isActive? 'row':'row d-none'" id="buyer-login" style="padding-top: 0;">
+        <div class="offset-md-3 col-md-6 white-bg borders">
+            <div class="row p-m-0">
+                <h4>Discover the best events for your brand</h4>
+            </div>
+            <form class="form-control-line m-t-40 form1-bg buyer" [formGroup]="registerBuyerForm" (ngSubmit)="onSubmit(templateSuccess)">
+                <div class="row m-0  bo-top" style="padding-top: 15px;">
+                    <div class="form-group validate-tb1 col-md-6">
+                        <button id="add-user-linkedin" class="btn register-btn btn-block">Signup with Linkedin</button>
+                    </div>
+                    <div class="form-group validate-tb2 col-md-6">
+                        <div class="file-upload-wrapper" [attr.data-text]="image.description">
+                            <input name="file-upload-field" (change)="inputFile($event)" type="file" class="file-upload-field"
+                                value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isFirstName === 1,'': isFirstName < 1, 'has-danger': isFirstName > 1}">
+                            <label class="form-control-label" for="buyer_first_name">First Name</label>
+                            <input type="text" formControlName="buyer_first_name" class="form-control form-control-success"
+                                id="buyer_first_name" name="buyer_first_name" (keyup)="firstName($event)" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isLastName === 1,'': isLastName < 1, 'has-danger': isLastName > 1}">
+                            <label class="form-control-label" for="buyer_last_name">Last Name</label>
+                            <input type="text" formControlName="buyer_last_name" id="buyer_last_name" class="form-control form-control-warning"
+                                name="buyer_last_name" (keyup)="lastName($event)" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isCompanyName === 1,'': isCompanyName < 1, 'has-danger': isCompanyName > 1}">
+                            <label class="form-control-label" for="buyer_company_name">Company Name</label>
+                            <input type="text" formControlName="buyer_company_name" class="form-control form-control-success"
+                                id="buyer_company_name" name="buyer_company_name" (keyup)="companyField($event)"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isCategoryName === 1,'': isCategoryName < 1, 'has-danger': isCategoryName > 1}">
+                            <label class="form-control-label" for="buyer_category">Industry</label>
+                            <input type="text" formControlName="buyer_category" class="form-control form-control-warning"
+                                id="buyer_category" name="buyer_category" (keyup)="category($event)" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row " formGroupName="email_buyer">
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isEmail === 1,'': isEmail < 1, 'has-danger': isEmail > 1}">
+                            <label class="form-control-label" for="buyer_username">Email</label>
+                            <input type="text" formControlName="buyer_username" class="form-control form-control-success"
+                                id="buyer_username" name="buyer_username" (keyup)="email($event)" required>
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 408">Username already taken!</p>
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 407">Username already taken!</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isReEmail === 1,'': isReEmail < 1, 'has-danger': isReEmail > 1}">
+                            <label class="form-control-label" for="buyer_confirm_username">Confirm Email</label>
+                            <input type="text" formControlName="buyer_confirm_username" class="form-control form-control-warning"
+                                id="buyer_confirm_username" name="buyer_confirm_username" (keyup)="reEmail($event)"
+                                required>
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 408">Username already taken!</p>
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 407">Username already taken!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isPhone === 1,'': isPhone < 1, 'has-danger': isPhone > 1}">
+                            <label class="form-control-label" for="buyer_phone">Phone Num</label>
+                            <input type="text" formControlName="buyer_phone" class="form-control form-control-success"
+                                id="buyer_phone" name="buyer_phone" (keyup)="phone($event)">
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 409">Phone Number already taken!</p>
+                            <p class="danger-pass" *ngIf="messageBuyer.code === 407">Phone Number already taken!</p>
+                            <!-- <int-phone-prefix formControlName="buyer_phone"></int-phone-prefix> -->
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div [ngClass]="{'has-success': isPassword === 1,'': isPassword < 1, 'has-danger': isPassword > 1}">
+                            <label class="form-control-label" for="buyer_password">Password</label>
+                            <input id="buyer_password" formControlName="buyer_password" type="{{isActivePass}}" class="form-control form-control-warning"
+                                name="buyer_password" (keyup)="password($event)" required>
+                            <div (click)="changeHide()" *ngIf="isPass === false">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div (click)="changeHide()" *ngIf="isPass === true">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+                            <p class="danger-pass" *ngIf="f['buyer_password'].invalid && isPassword === 1">Must contain
+                                at least one uppercase,
+                                one lowercase, one special character and one number</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class=" col-md-6 cbox-bg">
+                        <p><input type="checkbox" name="subscribe" (change)="checkbox()" id="buyer_subscribe"
+                                formControlName="buyer_subscribe">
+                            <label for="buyer_subscribe">Subscribe to our newsletter</label></p>
+                    </div>
+                    <div class=" col-md-6 cbox-bg">
+                        <p><input type="checkbox" name="buyer_accept_term" (change)="checkbox()" id="buyer_accept_term"
+                                formControlName="buyer_accept_term"><label for="buyer_accept_term">Accept our <a href="">terms
+                                    &amp; conditions</a></label></p>
+                    </div>
+                </div>
+                <div class="col-12 p-0">
+                    <div class="col-md-6 ">
+                        <button class="btn register-cancel-btn btn-block" (click)="valueInput.hide()">Cancel</button>
+                    </div>
+                    <div class="col-md-6 ">
+                        <button id="register-buyer" type="submit" class="btn register-btn btn-block" [disabled]="isSignup">
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #add_user_seller let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="new-user">Register User</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">×</button>
+    </div>
+    <div class="modal-body">
+        <form class="form-material" [formGroup]="registerSellerForm">
+            <div class="form-group">
+                <label for="seller_first_name">First Name <span class="danger-pass">*</span></label>
+                <input type="text" id="seller_first_name" name="seller_first_name" class="form-control form-control-line"
+                    formControlName="seller_first_name" required>
+                <p class="txt-vali-company">{{validate.seller.seller_first_name}}</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_last_name">Last Name <span class="danger-pass">*</span></label>
+                <input type="text" id="seller_last_name" name="seller_last_name" class="form-control form-control-line"
+                    formControlName="seller_last_name">
+                <p class="txt-vali-company">{{validate.seller.seller_last_name}}</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_phone">Phone <span class="danger-pass">*</span></label>
+                <input type="number" id="seller_phone" name="seller_phone" class="form-control" placeholder=""
+                    formControlName="seller_phone">
+                <p class="txt-vali-company">{{validate.seller.seller_phone}}</p>
+                <p class="danger-pass" *ngIf="message.code === 409">Phone Number already taken!</p>
+                <p class="danger-pass" *ngIf="message.code === 407">Phone Number already taken!</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_username">Email <span class="danger-pass">*</span></label>
+                <input type="email" id="seller_username" name="seller_username" class="form-control" placeholder=""
+                    formControlName="seller_username">
+                <p class="txt-vali-company">{{validate.seller.seller_username}}</p>
+                <p class="danger-pass" *ngIf="message.code === 408">Username already taken!</p>
+                <p class="danger-pass" *ngIf="message.code === 407">Username already taken!</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_confirm_username">Confirm Email <span class="danger-pass">*</span></label>
+                <input type="email" id="seller_confirm_username" name="seller_confirm_username" class="form-control"
+                    placeholder="" formControlName="seller_confirm_username">
+                <p class="txt-vali-company">{{validate.seller.seller_confirm_username}}</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_password">Password <span class="danger-pass">*</span></label>
+                <input type="password" id="seller_password" name="seller_password" class="form-control" value=""
+                    formControlName="seller_password" (keyup)="passwordSeller($event)">
+                <p class="txt-vali-company">{{validate.seller.seller_password}}</p>
+                <p class="danger-pass" *ngIf="g['seller_password'].invalid && isPasswordSeller === 1">Must contain at
+                    least one uppercase,
+                    one lowercase, one special character and one number</p>
+            </div>
+            <div class="form-group">
+                <label for="seller_confirm_password">Confirm Password <span class="danger-pass">*</span></label>
+                <input type="password" id="seller_confirm_password" name="seller_confirm_password" class="form-control"
+                    formControlName="seller_confirm_password" (keyup)="passwordSellerConfirm($event)">
+                <p class="txt-vali-company"> {{validate.seller.seller_confirm_password}}</p>
+                <p class="danger-pass" *ngIf="g['seller_confirm_password'].invalid && isPasswordSellerConfirm === 1">Must
+                    contain at least one uppercase,
+                    one lowercase, one special character and one number</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel-list waves-effect text-left" (click)="modal.close('Save click')">
+                    Close
+                </button>
+                <button class="btn btn-primary float-right" data-toggle="modal" data-target=".bs-modal-map2" (click)="addUser(templateSuccess)">Save
+                </button>
+            </div>
+        </form>
+    </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</ng-template>
+
+<ng-template #templateSuccess class="success-register">
+    <!-- <div class="modal-header">
+        <h4 class="modal-title pull-left">Register Success</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> -->
+    <div class="modal-body success-register">
+        <i class="far fa-envelope-open"></i>
+        <h1>Successfully Registered</h1>
+        <h3>We’ve sent you an email….</h3>
+        <h4>Check your email for a registration confirmation. We'll see you soon!</h4>
+        <button class="btn-success-regis" (click)="modalRef.hide()">Done</button>
+    </div>
+</ng-template>
+<ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>

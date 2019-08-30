@@ -1,0 +1,54 @@
+<div class=" main-sub-menu">
+    <h3 class="sub-header-text ">Event Search</h3>
+    <div class="top-bar-btn-bg top-search-bg  co-6">
+        <div class="search-group row">
+            <div class="sreach-textbox col-md-6 p-0">
+                <i class="fas fa-search"></i>
+                <input class="form-control" type="text" (click)="toogleSearch()" value="Keywords" id="example-text-input">
+            </div>
+            <div class="sreach-textbox d-none d-md-block col-6 p-0">
+                <i class="fas fa-map-marker-alt"></i>
+                <form [formGroup]="searchLocation">
+                    <input class="form-control" (keyup.enter)="onKey($event)" formControlName="location" type="text" placeholder="Location" id="example-text-input">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="filter-details" *ngIf="isShow" class="row search-filter-summary-bg">
+    <div class="col-sm-3">
+     <h3>Date Range <span>{{dateFrom}} - {{dateTo}}</span></h3>
+    </div>
+   <div class="col-sm-7">
+     <h3 *ngIf="count === 0"><span class="p-t-10">0 events match your search. Use our FILTERS to discover other events</span></h3>
+     <h3 *ngIf="count !== 0"><span class="p-t-10">Discover below the {{count}} events that matched your search</span></h3>
+    </div>
+    <div class=" col-sm-2 float-right">
+        <button class="btn btn-block filter-edit-btn btn-info" (click)="toogleFilter()">Filters</button>
+    </div>
+</div>
+
+<div id="filter-details2" *ngIf="isFilter" class="row search-filter-summary-bg">
+    <div class="col-3">
+        <h4>{{dateFrom}} - {{dateTo}}</h4>
+        <h4 *ngIf="gender.all">Both Male &amp; Female</h4>
+        <h4 *ngIf="gender.male">Male</h4>
+        <h4 *ngIf="gender.female">Female</h4>
+    </div>
+    <div class="col-2 ">
+        <h3>Age Range <span>{{ageFrom}} to {{ageTo}} years</span></h3>
+    </div>
+    <div class="col-3 ">
+        <h3>Atendees <span>{{sizeFrom}} to {{sizeTo}} </span></h3>
+    </div>
+    <div class="col-3 ">
+        <h3>Budget <span>${{budgetFrom}}k to ${{budgetTo}}k</span> </h3>
+    </div>
+    <div class="col-1 ">
+        <button class="btn btn-block filter-edit-btn btn-info" (click)="toogleFilter($event)">Filters</button>
+    </div>
+</div>
+
+<event-more-search></event-more-search>
+<event-more-filter></event-more-filter>

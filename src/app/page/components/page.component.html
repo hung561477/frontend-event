@@ -1,0 +1,270 @@
+<ng-template #template>
+  <event-login [valueInput]="modalRef"></event-login>
+</ng-template>
+<ng-template #template1>
+  <event-signup [valueInput]="modalRef"></event-signup>
+</ng-template>
+<!-- header
+    ================================================== -->
+<header class="s-header logo" [ngClass]="isLogo? 's-header logo opaque' : 's-header logo'" (window:scroll)="onWindowScroll($event)">
+  <div class="header-left"></div>
+  <div class="header-logo ">
+    <a class="site-logo" href="" *ngIf="isLogo">
+      <img src="../../../assets/images/logo.png" alt="Homepage">
+    </a>
+  </div>
+  <!-- end header-logo -->
+
+  <!--  header-nav__content
+ ================================================== -->
+  <nav class="header-nav" [ngClass]="_opened? 'header-nav menu-is-open':'header-nav'">
+
+    <a (click)="_toggleSidebar()" class="header-nav__close" title="close"><span>Close</span></a>
+
+    <h3>Navigate to</h3>
+
+    <div class="header-nav__content">
+
+      <ul class="header-nav__list">
+        <li><a class="smoothscroll" href="#home" title="home">Home</a></li>
+        <li><a class="smoothscroll" href="#HIW" title="How it Works">How it works</a></li>
+        <li><a class="smoothscroll" href="#search" title="Search Events">Search events </a></li>
+        <li><a class="smoothscroll" href="#post" title="Add Events">Promote events</a></li>
+        <li><a class="smoothscroll" href="#dables" title="eventdables">The eventdables</a></li>
+        <li><a class="smoothscroll" href="#dables" title="Why and Who">Why and Who</a></li>
+        <li><a class="smoothscroll" href="#about" title="About">Contact</a></li>
+      </ul>
+
+    </div>
+    <!-- end header-nav__content -->
+
+  </nav>
+  <!-- end header-nav -->
+
+  <a class="header-menu-toggle" (click)="_toggleSidebar()">
+    <span class="header-menu-icon"></span>
+  </a>
+  <div class="login-bt-wrapper float-right">
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-block btn-red" (click)="openModal(template1)">Sign up</button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-block btn-red" (click)="openModal(template)">Sign in</button>
+      </div>
+    </div>
+  </div>
+</header>
+<event-home></event-home>
+<!-- about ================================================== -->
+<section id="HIW" class="s-howIW target-section " style="padding: 50px 0;">
+  <div class="row" data-aos="fade-up">
+    <div class="col-md-5 ">
+      <img src="../../../../assets/images/banner/sportsman.png" width='100%'>
+    </div>
+    <div class="col-md-7">
+      <h2 class="subhead" style="margin-top: 20px">Better Business through Partnership Marketing</h2>
+      <h3 class="display-1">
+        event is a data driven network for <b>marketers</b> and <b>event properties</b> to connect based on
+        their shared values, objectives and audiences. A meaningful partnership is the initial spark that
+        will lead to engaging customer experiences and healthy business opportunities.
+      </h3>
+      <a href="../../../assets/content/how_it_works.html" target="_blank" class="btn btn-border tell">Tell me more <i
+          class="fas fa-play-circle"></i></a>
+    </div>
+  </div>
+  <!-- end section-header -->
+  <!-- end row -->
+</section>
+<!-- end about -->
+
+<!-- search ================================================== -->
+<section id='search' class="s-search target-section darker win-height  p-0 bg-image2">
+  <div class="row top-40">
+    <div class="parallelogram col-md-8 m-t-10">
+      <div class="row ">
+
+        <div class=" col-md-12 p-0">
+          <p>Discover the events attended by your target audience</p>
+        </div>
+      </div>
+    </div>
+    <a class="parallelogram2 offset-md-1 col-md-3 m-t-10" (click)="openModal(template1)">
+      <h2 class="search"> Search</h2>
+    </a>
+  </div>
+</section>
+<!-- end search -->
+<!-- who are we================================================== -->
+<section id="post" class="s-works target-section ">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="text-bg bg1">
+        <h2>Your event <br>is unique</h2>
+        <h3>
+          Attract the best brands for you and your attendees
+        </h3>
+        <button class="btn btn-border" (click)="openModal(template1)">Lets go</button>
+      </div>
+      <div class="image-1">
+        <img src="../../../../assets/images/banner/tennis.png" width="100%" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="image-2">
+      </div>
+      <div class="text-bg2 fs2-img">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class=" bg1 fs-img">
+      </div>
+      <div class="image-1">
+        <img src="../../../../assets/images/banner/crowd.png" width="100%" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="b-img-1">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="b-img-2">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="text-bg bg1 text-right m-t-30 box-3">
+        <h3>
+          Event Producers - Sports Clubs
+        </h3>
+        <h3>Social Clubs - Schools</h3>
+        <h3>Festivals - Conferences</h3>
+        <h3>Corporate Events</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end who r we -->
+<!-- expondables ================================================== -->
+<section id="dables" class="s-steps target-section darker">
+  <div class="row" style="width: 100%; max-width: none">
+    <div class="col-md-6 p-0">
+      <div class=" img-ables1">
+      </div>
+    </div>
+    <div class="col-md-6 ables-text2">
+      <div class="text-bg bg1 text-left m-t-20">
+        <h2>The <span>event</span>dables</h2>
+        <h3>
+          Brands and event organisers sometimes need a helping hand from freelancers, agencies, keynote
+          speakers, logistics partners etc – event is here to help!
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="width: 100%; max-width: none">
+    <div class="col-md-6 ables-text2">
+      <div class="text-bg bg12 text-left " style="padding-top: 96px">
+        <h3>
+          You provide products and services that will make events better for marketers, organisers and attendees?
+        </h3>
+        <button class="btn btn-border bottom-margin" (click)="openModal(template1)">Contact us
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 p-0 ">
+      <div class=" img-ables2">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About us -->
+<event-eventdables></event-eventdables>
+<footer>
+  <div class="row">
+    <div class=" col-md-4 text-left">
+      <img src="../../../assets/images/banner/logo.png" width="50%">
+      <p class="tag-line">
+        The Sponsorship Network
+      </p>
+      <ul class="contact-social">
+        <li>
+          <a href="#0"><i class="fab fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href="#0"><i class="fab fa-twitter"></i></a>
+        </li>
+        <li>
+          <a href="#0"><i class="fab fa-instagram"></i></a>
+        </li>
+        <li>
+          <a href="#0"><i class="fab fa-linkedin"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <p class="contact-address">
+        16 Raffles Quay<br>Hong Leong Building<br>Singapore
+      </p><br>
+      <p class="contact-numbers">
+        Singapore : +65 8722 6658 <br> France +33 6 29 66 89 47
+      </p>
+      <p class="contact-email">
+        <a href="mailto:hello@event.com">hello@event.com</a>
+      </p>
+    </div>
+    <div class=" col-md-4">
+      <p class="contact-address text-left">
+        Contact us
+      </p>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label class="title-label" for="input-first-name">First Name</label>
+          <input id="input-first-name" formControlName="name" name="First Name" placeholder="" type="text" class="input-full-width input-md input-rectangle"
+            required="">
+        </div>
+        <div class="form-group">
+          <label class="title-label" for="input-last-name">Last Name</label>
+          <input id="input-last-name" name="Last Name" formControlName="description" placeholder="" type="text" class="input-full-width input-md input-rectangle"
+            required="">
+        </div>
+        <div class="form-group">
+          <label class="title-label" for="input-email">Email</label>
+          <input id="input-email" name="Email" formControlName="email" placeholder="" type="email" class="input-full-width input-md input-rectangle"
+            required="">
+        </div>
+        <div class="recaptcha">
+          <re-captcha (resolved)="resolved($event)" siteKey="6LevI3wUAAAAAEbyzGancDGJz8Z59Jx6br-rBQT5"></re-captcha>
+        </div>
+        <button class="btn-submit" type="submit"> Submit </button>
+      </form>
+    </div>
+  </div>
+  <div class="row copy-rights-bg" style="width: 100%">
+    <div class="col-full ss-copyright">
+      <span>© Copyright event Pte. Ltd 2018</span>
+      <span>All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog" aria-labelledby="dialog-static-name"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Login Expired</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please Login Try Again to continute
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

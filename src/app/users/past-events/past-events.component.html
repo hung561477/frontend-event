@@ -1,0 +1,23 @@
+<event-top-past-events></event-top-past-events>
+<div class="clearfix"></div>
+<div class="row p-top-70">
+    <div class="col-12" *ngIf="role === 'SELLER'">
+        <div *ngFor="let item of completed">
+            <event-item-recent-event [valueInput]="item"></event-item-recent-event>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-10 p-l-10 p-r-10" *ngIf="role === 'BUYER'">
+        <div class="add1-bg">
+            <img src="../../../assets/images/ads-1.PNG" width="100%">
+        </div>
+        <div *ngFor="let item of completed">
+            <event-item-wishlist [valueInput]="item"></event-item-wishlist>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-2 p-l-10 p-r-10 hidden-md-down" *ngIf="role === 'BUYER'">
+        <div class="add1-bg">
+            <img src="../../../assets/images/ads-2.PNG" width="100%">
+            <img src="../../../assets/images/ads-3.PNG" width="100%">
+        </div>
+    </div>
+</div>

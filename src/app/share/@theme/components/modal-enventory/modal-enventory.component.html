@@ -1,0 +1,303 @@
+<div class="modal-dialog modal-md modal-enven">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myLargeModalLabel" *ngIf="activeDom === 1 || activeDom === 0">Add inventory</h4>
+            <h4 class="modal-title" id="myLargeModalLabel" *ngIf="activeDom === 2">Update inventory</h4>
+            <button type="button" aria-hidden="true" class="close" (click)="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formInventory">
+                <div class="row">
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-md-6': 'col-md-6  d-none'">
+                        <div class="form-group">
+                            <label for="">Inventory name <span class="text-danger">*</span></label>
+                            <input type="text" formControlName="modalName" class="form-control required" value="Inventory12"
+                                name="webUrl3" (keyup)="onKey($event)" required>
+                            <div *ngIf="submitted && inventForm['modalName'].errors">
+                                <div class="text-danger">This field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-md-6': 'col-md-6  d-none'">
+                        <label> Adds tags <span class="text-danger">*</span></label>
+                        <div class="input-group m-b-30">
+                            <tag-input [theme]="'bootstrap'" formControlName="tags" [placeholder]="'Type KEYWORDS that showcase this inventory'"
+                                [secondaryPlaceholder]="'Add Tags'" [(ngModel)]='itemsTags' name="Add Tags" [addOnBlur]="true">
+                            </tag-input>
+                        </div>
+                    </div>
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-md-6 form-group': 'form-group col-md-6  d-none'">
+                        <label for="wdate2">Date(s) & Time(s) <span class="text-danger">*</span></label>
+                        <!-- <input type="date" formControlName="modalDeadline" value="21/05/2019" class="form-control"
+                                    id="wdate2" (keyup)="onDeadline($event)" required> -->
+                        <input type="text" name="datetimes" class="form-control datetime required dateRange" />
+                        <div *ngIf="submittedDeadline && deadlineVali">
+                            <div class="text-danger">This field is required.</div>
+                        </div>
+                    </div>
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-12': 'col-12  d-none'">
+                        <div class="row">
+                            <div class="col-12 mb-30">
+                                <h4 class="card-title">Inventory photo <span class="text-danger">*</span></h4>
+                                <div class="row">
+                                    <div class="set-width col-6" *ngFor="let i of domObj; let e = index" [attr.id]="i.id">
+                                        <h2 class="text-danger" *ngIf="isErrorImage">Full Size</h2>
+                                        <p class="text-danger text-center" *ngIf="submittedImage && urlImgArray.length === 0">At
+                                            least 1 image more be upload</p>
+                                        <div class="file-upload">
+                                            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+                                                Image</button>
+                                            <div class="image-upload-wrap" *ngIf="i.hide">
+                                                <input class="file-upload-input" type='file' (change)="readURL($event, i, e);"
+                                                    accept="image/*" />
+                                                <div class="drag-text">
+                                                    <h3>Drag and drop or select add Image</h3>
+                                                </div>
+                                            </div>
+                                            <div class="file-upload-content" *ngIf="!i.hide">
+                                                <img class="file-upload-image" *ngIf="i.base64" src="{{i.base64}}" alt="your image" />
+                                                <img class="file-upload-image" *ngIf="!i.base64 && i.url" src="{{i.url}}"
+                                                    alt="your image" />
+                                                <div class="image-title-wrap">
+                                                    <button type="button" (click)="removeUpload(i)" class="remove-image">Remove
+                                                        <span class="image-title">{{i.description}}</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-danger float-right btn-corner" *ngIf="i.id !== null && urlImgArray.length > 1"
+                                            type="button" (click)="removeUploadFile(e)">
+                                            <i class="fa fa-minus"></i></button>
+                                        <progress-bar *ngIf="i.process > 0 && i.process <= 101 " [progress]="i.process"
+                                            [color]="'#488aff'">
+                                        </progress-bar>
+                                        <div *ngIf="i.process === 200" class="text-success text-center">Upload Success</div>
+                                        <p class="text-warning text-center">Maximum upload file size: 5MB.</p>
+                                    </div>
+                                    <div class="set-width col-6">
+                                        <div class="p-10">
+                                            <button class="btn btn-success" type="button" (click)="addDom()"><i class="fas fa-plus"></i>
+                                                Add More
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-0 m-b-15">
+                        <div class="form-group">
+                            <div class="range-separation">
+                                <h4 class="range-slider-text p-b-16">Value of this sponsorship opportunity in USD</h4>
+                                <div class="clearfix"></div>
+                                <!-- <input type="text" id="range_04" name="range_01" value="" /> -->
+                                <input type="text" class="form-control required" formControlName="price">
+                                <span _ngcontent-c11="" class="prec2">USD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-0 m-b-15">
+                        <div class="form-group">
+                            <div class="range-separation h-100">
+                                <h4 class="range-slider-text ">In kind sponsorship
+                                    <div class="switch float-right">
+                                        <label>OFF
+                                            <input type="checkbox" [checked]="isChecked" (change)="checkStatus($event)"><span
+                                                class="lever"></span>ON</label>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-md-6': 'col-md-6  d-none'">
+                        <div class="form-group">
+                            <label for="shortDescription3">Description</label>
+                            <textarea value="Description 12345" formControlName="modalDescription" name="shortDescription"
+                                id="shortDescription3" rows="6" class="form-control" (keyup)="onKeyDes($event)"
+                                required></textarea>
+                            <div *ngIf="submittedDes && inventForm['modalDescription'].errors">
+                                <div class="text-danger">This field is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div [ngClass]="activeDom === 2 || activeDom === 0? 'form-group': 'form-group  d-none'">
+                            <label for="wdate2">Sponsorship deadline</label>
+                            <!-- <input type="date" formControlName="modalDeadline" value="21/05/2019" class="form-control"
+                                id="wdate2" (keyup)="onDeadline($event)" required> -->
+                            <input type="text" name="datetimes" class="form-control datetime required modal-date"
+                                formControlName="modalDeadline" [(ngModel)]='dateSpon' />
+                        </div>
+
+                        <div [ngClass]="activeDom === 2 || activeDom === 0? 'form-group': 'form-group  d-none'">
+                            <label for="wdate2">Expected audience</label>
+                            <input type="number" (keyup)="onAudience($event)" formControlName="modalSize" value="3500"
+                                class="form-control" (blur)="checkValidateNumber(size)" required>
+                            <span style="color: red; font-size: 12px;" *ngIf="validateNumber && inventForm['modalSize'].value === 0 || inventForm['modalSize'].value === null">Please
+                                enter number
+                                greater than 0</span>
+                            <div *ngIf="submittedAudience && inventForm['modalSize'].errors">
+                                <div class="text-danger">This field is required.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div [ngClass]="activeDom === 2 || activeDom === 0? 'col-md-12': 'col-md-12  d-none'">
+                        <div class="form-group">
+                            <label for="shortDescription3">Select this inventory's audience</label>
+                        </div>
+                        <div class="btn-group">
+                            <div class="radio col-12 col-md-6">
+                                <label><input type="radio" name="optradio" checked (click)="activeAudience(1)"> My
+                                    audience for this inventory is the same as the main event</label>
+                            </div>
+                            <div class="radio col-12 col-md-6">
+                                <label><input type="radio" name="optradio" (click)="activeAudience(2)">My audience for
+                                    this inventory is different as the main event</label>
+                            </div>
+                        </div>
+                        <div [ngClass]="keyAudience === 2? 'row': 'row d-none'">
+                            <div class="col-md-6 p-0">
+                                <div class="range-separation">
+                                    <h4 class="range-slider-text p-b-16">Set the age range <span class="text-danger">*</span>
+                                    </h4>
+                                    <div class="clearfix"></div>
+                                    <input type="text" id="agerange" name="range_01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0">
+                                <div [ngClass]="validateGender? 'range-separation': 'range-separation error'">
+                                    <h4 class="range-slider-text p-b-16">Gender
+                                        <small *ngIf="!validateGender" class="text-center">The total must equal 100%</small>
+                                        <span class="text-danger">*</span>
+                                    </h4>
+                                    <div class="input-daterange input-group" id="error-msg">
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="male" class="form-control Gender" name="start"
+                                                placeholder="Male" min="0" max="100" (keyup)="maleChange($event)"
+                                                formControlName="male" (change)="maleChange($event)">
+                                            <span class="prec">%</span>
+                                        </div>
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="female" class="form-control Gender" name="Female"
+                                                placeholder="Female" min="0" max="100" (keyup)="femaleChange($event)"
+                                                formControlName="female" (change)="femaleChange($event)">
+                                            <span class="prec">%</span>
+                                        </div>
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="other" class="form-control Gender" name="Unknown"
+                                                placeholder="Unknown" min="0" max="100" (keyup)="otherChange($event)"
+                                                formControlName="other" (change)="otherChange($event)">
+                                            <span class="prec">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0">
+                                <div class="range-separation">
+                                    <h4 class="range-slider-text p-b-16">Select career profile</h4>
+                                    <select2 [data]="carreeData" (valueChanged)="changedCarree($event)" [value]="value"
+                                        [options]="options"></select2>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0">
+                                <div [ngClass]="validateCivil? 'range-separation': 'range-separation error'">
+                                    <h4 class="range-slider-text m-b-16 ">Civil status
+                                        <small *ngIf="!validateCivil" class="text-danger">The total must equal 100%</small>
+                                        <span class="float-right d-none">
+                                            <label class="checkbox">
+                                                <input id="civil" name="feature-1" value="1" type="checkbox" class="publish">
+                                                <label for="civil" class="label-text">Publish in Page</label>
+                                            </label>
+                                        </span>
+                                    </h4>
+                                    <div class="input-daterange input-group">
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="Single" class="form-control" name="start"
+                                                placeholder="Single" formControlName="single" min="0" (keyup)="singleChange($event)"
+                                                (change)="singleChange($event)">
+                                            <span class="prec">%</span>
+                                        </div>
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="Married" class="form-control" name="start"
+                                                placeholder="Married" formControlName="married" min="0" (keyup)="marriedChange($event)"
+                                                (change)="marriedChange($event)">
+                                            <span class="prec">%</span>
+                                        </div>
+                                        <div class="col-4 p-0">
+                                            <input type="number" id="other" min="0" class="form-control" name="end"
+                                                placeholder="Unknown" (keyup)="separatedChange($event)" (change)="separatedChange($event)"
+                                                formControlName="separated">
+                                            <span class="prec">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0">
+                                <div class="range-separation">
+                                    <h4 class="range-slider-text p-b-16">Median annual household income (USD)
+                                        <span class="float-right d-none">
+                                            <label class="checkbox">
+                                                <input id="houseIncome" name="feature-1" value="1" type="checkbox"
+                                                    class="publish">
+                                                <label for="houseIncome" class="label-text">Publish in Page</label>
+                                            </label>
+                                        </span>
+                                    </h4>
+                                    <input type="text" id="houseincome" name="houseincome" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0 ">
+                                <div class="range-separation location">
+                                    <h4 class="range-slider-text p-b-16">Where do your attendees come from?
+                                        <span class="float-right d-none">
+                                            <label class="checkbox">
+                                                <input id="education" name="feature-1" value="1" type="checkbox" class="publish">
+                                                <label for="education" class="label-text">Publish in Page</label>
+                                            </label>
+                                        </span>
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col-6 col-md-3 text-center p-0 ">
+                                            <label class="checkbox">
+                                                <input id="local1" name="feature-1" type="checkbox" class="publish">
+                                            </label>
+                                            <p>local</p>
+                                        </div>
+                                        <div class="col-6 col-md-3 text-center p-0 ">
+                                            <label class="checkbox">
+                                                <input id="regional1" name="feature-1" type="checkbox" class="publish">
+                                            </label>
+                                            <p>regional</p>
+                                        </div>
+                                        <div class="col-6 col-md-3 text-center p-0 ">
+                                            <label class="checkbox">
+                                                <input id="national1" name="feature-1" type="checkbox" class="publish">
+                                            </label>
+                                            <p>national</p>
+                                        </div>
+                                        <div class="col-6 col-md-3 text-center p-0 ">
+                                            <label class="checkbox">
+                                                <input id="international1" name="feature-1" type="checkbox" class="publish">
+                                            </label>
+                                            <p>international</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button (click)="closeModal()" type="button" class="btn btn-outline-danger"><i class="fas fa-window-close"></i>
+                Close</button>
+            <button type="button" (click)="onSubmit()" data-toggle="modal" *ngIf="activeDom === 0 || activeDom === 1"
+                class="btn btn-primary waves-effect waves-light" [disabled]="validateNumber"><span class="btn-label"><i
+                        class="fas fa-plus-circle"></i></span>Done</button>
+            <button type="button" (click)="onEdit()" data-toggle="modal" *ngIf="activeDom === 2" class="btn btn-primary waves-effect waves-light"><span
+                    class="btn-label"><i class="fas fa-plus-circle"></i></span>Done</button>
+        </div>
+    </div>
+</div>

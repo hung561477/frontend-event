@@ -1,0 +1,116 @@
+<div class="md-content" style="min-height: 100vh;">
+    <div class="img-bg">
+        <h3>
+            <button class="md-close modal-top-close" (click)="valueInput.hide()">
+                <i class="fas fa-times"></i>
+            </button>
+        </h3>
+    </div>
+    <div class="row ">
+        <div class="offset-md-3 col-md-6 p-0 white-bg">
+            <form class="form-control-line m-t-40 form1-bg seller" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h3>Sign in</h3>
+                <div class=" offset-md-1 col-md-10">
+                    <div class="form-group validate-tb-login1 col-12">
+                        <div [ngClass]="{'has-success': isUsername === 1,'': isUsername < 1, 'has-danger': isUsername > 1}">
+                            <label class="form-control-label" for="username">Email</label>
+                            <input type="text" class="form-control form-control-success" id="username" formControlName="username"
+                                (keyup)="username($event)">
+                        </div>
+                    </div>
+                    <div class="form-group validate-tb-login2 col-12">
+                        <div [ngClass]="{'has-success': isPassword === 1,'': isPassword < 1, 'has-danger': isPassword > 1}">
+                            <label class="form-control-label" for="password">Password</label>
+                            <input formControlName="password" type="{{typeEye? 'password': 'text'}}" class="form-control form-control-warning"
+                                name="password" id="password" value="" (keyup)="password($event)">
+                            <div (click)="setEye('text')" *ngIf="typeEye">
+                                <i class="fas fa-eye password-icon"></i>
+                            </div>
+                            <div (click)="setEye('password')" *ngIf="!typeEye">
+                                <i class="fas fa-eye-slash password-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" offset-md-1 col-md-10">
+                    <p class="text-alert">{{textAlert}}</p>
+                </div>
+                <div class="  offset-md-1 col-md-10">
+                    <div class=" col-md-6 cbox-bg">
+                        <p><input type="checkbox" [checked]="isChecked" id="cb2" (change)="rememberMe($event)"><label for="cb2">Remember me</label></p>
+                    </div>
+                    <div class=" col-md-6 cbox-bg">
+                        <p><a class="text-success" (click)="showChildModal()">Forgot Password</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <button class="btn register-cancel-btn btn-block" (click)="valueInput.hide()">Cancel</button>
+                </div>
+                <div class="col-md-6 ">
+                    <button type="submit" tabindex="-1" id="login-btn" class="btn register-btn btn-block">Let's
+                        Go!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content custom-modal">
+            <div class="modal-body filter-grey text-center">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <img class="img-fluid img-fix-haft" src="../../../../assets/Logo.png" alt="">
+                                <p class="text-fix">If you have forgotten your password you can reset it here.</p>
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <form action="" [formGroup]="forgotForm" (ngSubmit)="onSubmitForgot()">
+                                            <div class="form-group">
+                                                <input class="form-control input-lg input-custom" placeholder="E-mail Address"
+                                                    name="email" type="email" formControlName="email">
+                                            </div>
+                                            <button class="btn btn-lg btn-primary btn-block custom-btn" type="submit">Reset
+                                                my password</button>
+                                            <a class="btn btn-lg btn-primary btn-cancel" (click)="hideChildModal()">Back
+                                                to Login</a>
+                                        </form>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #childModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-child-name" class="modal-title pull-left">We have sent for you a email Login Infomation</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal1()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <div class="panel-body">
+                                    <a (click)="hideChildModal1()" class="btn btn-lg btn-primary btn-block">Back Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

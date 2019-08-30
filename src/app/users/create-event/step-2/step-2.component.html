@@ -1,0 +1,197 @@
+<section class="body step-2" [formGroup]="step2">
+    <div class="row">
+        <div class="col-md-6">
+            <label> Type KEYWORDS that showcase your event <span class="text-danger">*</span></label>
+            <div class="input-group m-b-30">
+                <tag-input [theme]="'bootstrap'" formControlName="tag" [placeholder]="'Add Tag'" [secondaryPlaceholder]="'Add Tag'"
+                    (onAdd)="onAdd($event)" (onRemove)="onRemove($event)" [(ngModel)]='items' name="Tag" [addOnBlur]="true">
+                </tag-input>
+                <div *ngIf="submittedTag && items.length === 0" class="invalid-feedback">
+                    <div class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Expected Audience <span class="text-danger">*</span></label>
+                <input type="number" min="0" class="form-control required" value="1" formControlName="audience" name="webUrl3"
+                    (keyup)="onKey($event)" [(ngModel)]="audience" required>
+                <div *ngIf="submitted && g['audience'].errors" class="invalid-feedback">
+                    <div class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label> Type KEYWORDS for the partners you are looking for <span class="text-danger">*</span></label>
+            <div class="input-group m-b-30">
+                <tag-input [theme]="'bootstrap'" formControlName="tag_search" [placeholder]="'Add Tags'" (onAdd)="onAddTag($event)"
+                    (onRemove)="onRemoveTag($event)" [secondaryPlaceholder]="'Add Tag'" [(ngModel)]='itemsTags' name="Tag"
+                    [addOnBlur]="true">
+                </tag-input>
+                <div *ngIf="submittedTags && itemsTags.length === 0" class="invalid-feedback">
+                    <div class="text-danger">This field is required.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 p-b-10">
+            <h4>Expected audience profile</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div class="range-separation">
+                    <h4 class="range-slider-text p-b-16">Set the age range <span class="text-danger">*</span>
+                        <small *ngIf="age.to === 0 && submittedAge" class="text-danger">The age to > 0</small>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <input type="text" formControlName="age_range" id="range_01" name="range_01" (keyup)="onAge($event)" />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div [ngClass]="validateGender? 'range-separation': 'range-separation error'">
+                    <h4 class="range-slider-text p-b-16">Gender
+                        <small *ngIf="!validateGender">The total must equal 100%</small> <span class="text-danger">*</span>
+                        <small *ngIf="submittedGender && totalGender === 0" class="text-danger">This field is required.</small>
+                    </h4>
+                    <div class="input-daterange input-group" id="error-msg">
+                        <div class="col-4 p-0">
+                            <input type="number" id="male" class="form-control Gender" name="start" placeholder="Male"
+                                formControlName="male" min="0" max="100" (keyup)="maleChange($event)" (change)="maleChange($event)"
+                                [(ngModel)]="male">
+                            <span class="prec">%</span>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input type="number" id="female" class="form-control Gender" name="Female" placeholder="Female"
+                                formControlName="female" min="0" max="100" (keyup)="femaleChange($event)" (change)="femaleChange($event)"
+                                [(ngModel)]="female">
+                            <span class="prec">%</span>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input type="number" id="other" class="form-control Gender" formControlName="other" name="Unknown"
+                                placeholder="Unknown" min="0" max="100" (keyup)="otherChange($event)" (change)="otherChange($event)"
+                                [(ngModel)]="other">
+                            <span class="prec">%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div class="range-separation">
+                    <h4 class="range-slider-text p-b-16">Select career profile
+                        <span class="float-right d-none">
+                            <label class="checkbox">
+                                <input id="career" name="feature-1" value="1" type="checkbox" class="publish">
+                                <label for=career class="label-text">Publish in Page</label>
+                            </label>
+                        </span>
+
+                    </h4>
+                    <select2 [data]="exampleData" (valueChanged)="changed($event)" [value]="value" [options]="options"></select2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div [ngClass]="validateCivil? 'range-separation': 'range-separation error'">
+                    <h4 class="range-slider-text m-b-16 ">Civil status
+                        <small *ngIf="!validateCivil">The total must equal 100%</small>
+                        <span class="float-right d-none">
+                            <label class="checkbox">
+                                <input id="civil" name="feature-1" value="1" type="checkbox" class="publish">
+                                <label for="civil" class="label-text">Publish in Page</label>
+                            </label>
+                        </span>
+                    </h4>
+                    <div class="input-daterange input-group">
+                        <div class="col-4 p-0">
+                            <input type="number" id="Single" class="form-control" name="start" placeholder="Single"
+                                formControlName="single" min="0" (keyup)="singleChange($event)" (change)="singleChange($event)"
+                                [(ngModel)]="single">
+                            <span class="prec">%</span>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input type="number" id="Married" class="form-control" name="start" placeholder="Married"
+                                formControlName="married" min="0" (keyup)="marriedChange($event)" (change)="marriedChange($event)"
+                                [(ngModel)]="married">
+                            <span class="prec">%</span>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input type="number" id="other" min="0" class="form-control" name="end" placeholder="Unknown"
+                                (keyup)="separatedChange($event)" (change)="separatedChange($event)" formControlName="separated"
+                                [(ngModel)]="separated">
+                            <span class="prec">%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div class="range-separation">
+                    <h4 class="range-slider-text p-b-16">Median annual household income (USD)
+                        <span class="float-right d-none">
+                            <label class="checkbox">
+                                <input id="houseIncome" name="feature-1" value="1" type="checkbox" class="publish">
+                                <label for="houseIncome" class="label-text">Publish in Page</label>
+                            </label>
+                        </span>
+                    </h4>
+                    <input type="text" id="range_02" name="range_01" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 p-0 m-b-15">
+            <div class="form-group">
+                <div class="range-separation location">
+                    <h4 class="range-slider-text p-b-16">Where do your attendees come from?
+                        <span class="float-right d-none">
+                            <label class="checkbox">
+                                <input id="education" name="feature-1" value="1" type="checkbox" class="publish">
+                                <label for="education" class="label-text">Publish in Page</label>
+                            </label>
+                        </span>
+                    </h4>
+                    <div class="row">
+                        <div class="col-6 col-md-3 text-center p-0">
+                            <label class="checkbox">
+                                <input id="local" name="feature-1" type="checkbox" class="publish">
+                            </label>
+                            <p>local</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center p-0">
+                            <label class="checkbox">
+                                <input id="regional" name="feature-1" type="checkbox" class="publish">
+                            </label>
+                            <p>regional</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center p-0">
+                            <label class="checkbox">
+                                <input id="national" name="feature-1" type="checkbox" class="publish">
+                            </label>
+                            <p>national</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center p-0">
+                            <label class="checkbox">
+                                <input id="international" name="feature-1" type="checkbox" class="publish">
+                            </label>
+                            <p>international</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
